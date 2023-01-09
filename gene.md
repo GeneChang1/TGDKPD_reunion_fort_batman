@@ -10,6 +10,8 @@ function searchGoogle() {
 </script>
 <input type="text" id="search-bar">
 <button onclick="searchGoogle()">Search</button>
+<body>
 <script async src="https://cse.google.com/cse.js?cx=42f4def64b4404444">
 </script>
 <div class="gcse-search"></div>
+</body>
