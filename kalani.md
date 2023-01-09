@@ -9,8 +9,8 @@
             .chess-board .light { background: #eee; }
             .chess-board .dark { background: #000; }
         </style>
-    </head>
-    <body>
+     </head>
+       <body>
         <table class="chess-board">
             <tbody>
                 <tr>
@@ -26,25 +26,25 @@
                 </tr>
                 <tr>
                     <th>8</th>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
+                    <td class="light">♖</td>
+                    <td class="dark">♘</td>
+                    <td class="light">♗</td>
+                    <td class="dark">♔</td>
+                    <td class="light">♕</td>
+                    <td class="dark">♗</td>
+                    <td class="light">♘</td>
+                    <td class="dark">♖</td>
                 </tr>
                 <tr>
                     <th>7</th>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
+                    <td class="dark">♙</td>
+                    <td class="light">♙</td>
+                    <td class="dark">♙</td>
+                    <td class="light">♙</td>
+                    <td class="dark">♙</td>
+                    <td class="light">♙</td>
+                    <td class="dark">♙</td>
+                    <td class="light">♙</td>
                 </tr>
                 <tr>
                     <th>6</th>
@@ -92,25 +92,25 @@
                 </tr>
                 <tr>
                     <th>2</th>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
+                    <td class="light">♟</td>
+                    <td class="dark">♟</td>
+                    <td class="light">♟</td>
+                    <td class="dark">♟</td>
+                    <td class="light">♟</td>
+                    <td class="dark">♟</td>
+                    <td class="light">♟</td>
+                    <td class="dark">♟</td>
                 </tr>
                 <tr>
                     <th>1</th>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
+                    <td class="dark">♜</td>
+                    <td class="light">♞</td>
+                    <td class="dark">♝</td>
+                    <td class="light">♚</td>
+                    <td class="dark">♛</td>
+                    <td class="light">♝</td>
+                    <td class="dark">♞</td>
+                    <td class="light">♜</td>
                 </tr>
             </tbody>
         </table>
