@@ -2,18 +2,11 @@
 <p id="search"></p>
 <td><input type="i" id="o"></td>
 <script>
-function search(query) {
-  window.open('https://www.google.com/search?q=' + query); }
- var form = document.getElementById('search-form');
-    form.addEventListener('submit', function(event) {
-  event.preventDefault();
-  var input = document.getElementById('search-input');
-  var query = input.value;
-  search(query);
-});
-
+function searchGoogle() {
+  // Get the search query from the search bar
+  var query = document.getElementById("search-bar").value;
+  window.location.href = "https://www.google.com/search?q=" + query;
+}
 </script>
-<form id="search-form">
-  <input type="text" id="search-input">
-  <button type="submit">Search</button>
-</form>
+<input type="text" id="search-bar">
+<button onclick="searchGoogle()">Search</button>
