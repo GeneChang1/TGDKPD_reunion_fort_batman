@@ -1,5 +1,5 @@
 <div id="Searchbar"></div>
-<p id="search"></p>
+<p id="Search"></p>
 <td><input type="i" id="o"></td>
 <script>
 function searchGoogle() {
