@@ -5,8 +5,6 @@
 function searchGoogle() {
   // Get the search query from the search bar
   var query = document.getElementById("search-bar").value;
-  
-  // Redirect to the Google search page with the query as the search parameter
   window.location.href = "https://www.google.com/search?q=" + query;
 }
 </script>
