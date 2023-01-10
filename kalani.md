@@ -1,3 +1,7 @@
+---
+permalink: /kalani
+---
+
 <html>
     <head>
         <title></title>
