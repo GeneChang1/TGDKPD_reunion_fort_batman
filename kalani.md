@@ -9,7 +9,7 @@ permalink: /kalani
         <style>
             .chess-board { border-spacing: 0; border-collapse: collapse; }
             .chess-board th { padding: 2em; }
-            .chess-board td { border: 1px solid; width: 2em; height: 1.5em; }
+            .chess-board td { border: 1px solid; width: 2em; height: 2em; }
             .chess-board .light { background: #aaa; }
             .chess-board .dark { background: #666; }
         </style>
