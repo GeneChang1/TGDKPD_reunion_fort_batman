@@ -92,25 +92,25 @@
                 </tr>
                 <tr>
                     <th>2</th>
-                    <td class="light">♟</td>
-                    <td class="dark">♟</td>
-                    <td class="light">♟</td>
-                    <td class="dark">♟</td>
-                    <td class="light">♟</td>
-                    <td class="dark">♟</td>
-                    <td class="light">♟</td>
-                    <td class="dark">♟</td>
+                    <td class="light"><img src= "https://user-images.githubusercontent.com/111609656/211784497-79850d37-9666-41e1-bc81-5cb9b8becea1.png"></td>
+                    <td class="dark"><img src= "https://user-images.githubusercontent.com/111609656/211784497-79850d37-9666-41e1-bc81-5cb9b8becea1.png"></td>
+                    <td class="light"><img src= "https://user-images.githubusercontent.com/111609656/211784497-79850d37-9666-41e1-bc81-5cb9b8becea1.png"></td>
+                    <td class="dark"><img src= "https://user-images.githubusercontent.com/111609656/211784497-79850d37-9666-41e1-bc81-5cb9b8becea1.png"></td>
+                    <td class="light"><img src= "https://user-images.githubusercontent.com/111609656/211784497-79850d37-9666-41e1-bc81-5cb9b8becea1.png"></td>
+                    <td class="dark"><img src= "https://user-images.githubusercontent.com/111609656/211784497-79850d37-9666-41e1-bc81-5cb9b8becea1.png"></td>
+                    <td class="light"><img src= "https://user-images.githubusercontent.com/111609656/211784497-79850d37-9666-41e1-bc81-5cb9b8becea1.png"></td>
+                    <td class="dark"><img src= "https://user-images.githubusercontent.com/111609656/211784497-79850d37-9666-41e1-bc81-5cb9b8becea1.png"></td>
                 </tr>
                 <tr>
                     <th>1</th>
-                    <td class="dark">♜</td>
-                    <td class="light">♞</td>
-                    <td class="dark">♝</td>
-                    <td class="light">♚</td>
-                    <td class="dark">♛</td>
-                    <td class="light">♝</td>
-                    <td class="dark">♞</td>
-                    <td class="light">♜</td>
+                    <td class="dark"><img src="https://user-images.githubusercontent.com/111609656/211785224-44d3331d-1c23-4f9b-8b57-b8cb22a35ad7.png"></td>
+                    <td class="light"><img src="https://user-images.githubusercontent.com/111609656/211785423-30a117d0-5217-4f90-8632-a35d06182765.png"></td>
+                    <td class="dark"><img src="https://user-images.githubusercontent.com/111609656/211785559-87619dcd-9225-4d71-9807-58e2bfb7b9c1.png"></td>
+                    <td class="light"><img src="https://user-images.githubusercontent.com/111609656/211785742-301835f0-cc33-4499-9364-c44461471ea5.png"></td>
+                    <td class="dark"><img src="https://user-images.githubusercontent.com/111609656/211785666-0fad7801-bf94-4da7-9b40-a0675421b9e6.png"></td>
+                    <td class="light"><img src="https://user-images.githubusercontent.com/111609656/211785559-87619dcd-9225-4d71-9807-58e2bfb7b9c1.png"></td>
+                    <td class="dark"><img src="https://user-images.githubusercontent.com/111609656/211785423-30a117d0-5217-4f90-8632-a35d06182765.png"></td>
+                    <td class="light"><img src="https://user-images.githubusercontent.com/111609656/211785224-44d3331d-1c23-4f9b-8b57-b8cb22a35ad7.png"></td>
                 </tr>
             </tbody>
         </table>
