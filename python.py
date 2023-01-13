@@ -5,17 +5,20 @@ class User:
         self._uid = uid
         self.set_password(password)
 
-    # a name getter method, extracts name from object
+
     @property
     def name(self):
         return self._name
     
-    # a setter function, allows name to be updated after initial object creation
-    @name.setter
-    def name(self, name):
-        self._name = name
-    
-    # a getter method, extracts email from object
+
     @property
     def uid(self):
         return self._uid
+
+    @property
+    def dob(self):
+        return self._dob
+
+    @property
+    def password(self):
+        return self._password
