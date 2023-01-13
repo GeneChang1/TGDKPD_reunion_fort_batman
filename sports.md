@@ -1,3 +1,8 @@
+---
+layout: default
+title: TESTER
+---
+
 <html>
     <head>
         <title></title>
