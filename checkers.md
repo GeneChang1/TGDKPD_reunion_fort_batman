@@ -1,16 +1,12 @@
----
-layout: default
----
-
 <html>
 
 <head>
 <meta charset="UTF-8"> 
-<title>Chessboard</title>
+<title>Checkers</title>
 
 <style type="text/css">
 
-.chessboard {
+.checkerboard {
     width: 720px;
     height: 720px;
     margin: -60px;
@@ -43,7 +39,7 @@ layout: default
 
 <body>
 
-<div class="chessboard">
+<div class="checkerboard">
 <!-- 1st -->
 <div class="white"><img src="https://user-images.githubusercontent.com/111609656/211652996-c0172ff0-be0a-4dbb-bb88-3171928d002e.png"></div>
 <div class="black"><img src="https://user-images.githubusercontent.com/111609656/211653992-32ec4aa8-0efc-461c-ad3f-d920a7de3409.png"></div>

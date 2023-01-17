@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <!--- This section is Cascading Style Sheet (CSS) and applies to HTML -->
 <style>
 /* "row style" is flexible size and aligns pictures in center */

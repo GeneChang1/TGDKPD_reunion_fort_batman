@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <div id="whatDaMoves"></div>
 <p id="badName"></p>
 <td><input type="input" id="openingRequest"></td>

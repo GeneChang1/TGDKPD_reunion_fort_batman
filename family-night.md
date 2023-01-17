@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Family Night
 > Each evening family will meet.  Family nights are intended to build the Leuck family legacy.
 

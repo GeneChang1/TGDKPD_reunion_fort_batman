@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Housing Overview
 > Sleeps 48 people. Verify your housing assignment at the reunion with Jeremiah and Melissa in case there are last minute changes.
  

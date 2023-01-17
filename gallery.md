@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Mom and Pop Leuck
 <!---
 Markdown Format takes entire column
