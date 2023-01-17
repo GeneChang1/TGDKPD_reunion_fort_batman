@@ -13,7 +13,7 @@ document.getElementById("userForm").onsubmit = function(event){
 
     //only run if passwords match
     if(password === passwordConfirm){
-        var data = `{ name: "${name}" password: "${password}" dob: "${dob}"}`
+        var data = `{ name: "${name}", password: "${password}", dob: "${dob}"}`
         // fetch(url + data, options)
         // .then(response => response.json().then(data => {
         // })
