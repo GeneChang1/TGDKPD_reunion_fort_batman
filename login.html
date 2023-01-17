@@ -1,27 +1,4 @@
-<form id="userForm">
-    <label>
-        Name:
-        <input type="text" name="name" id="name">
-    </label>
-    <br>
-    <label>
-        Password:
-        <input type="text" name="password" id="password">
-    </label>
-    <br>
-    <label>
-        Verify Password:
-        <input type="text" name="passwordConfirm" id="passwordConfirm">
-    </label>
-    <br>
-    <label>
-        Birthday:
-        <input type="date" name="dob" id="dob">
-    </label>
-    <br>
-    <input type="submit">
-</form>
-<script src="assets/js/login.js"></script>
+
 
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
@@ -113,4 +90,33 @@
         }
       });
     </script>
+</html>
+
+</head>
+<body>
+  <h1 class="header">
+    SIGN UP!
+  </h1>
+  <input type="username" class="login" id="uname" placeholder="Enter username here..">
+  <input type="password" class="login" id="pwd" placeholder="Enter password here..">
+   <input type="password" class="login" id="pwd" placeholder="Confirm password..">
+  <div>
+  <br>
+    <button id="enter" type="button" onclick="window.location.href='{{ site.baseurl }}/';">Sign me up!</button>
+  </div>
+  
+</body>
+<script>
+    // Get the input field
+    var input = document.getElementById("pwd");
+    // Execute a function when the user presses a key on the keyboard
+    input.addEventListener("keypress", function(event) {
+      // If the user presses the "Enter" key on the keyboard
+      if (event.key === "Enter") {
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.getElementById("enter").click();
+      }
+    });
+  </script>
 </html>
