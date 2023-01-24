@@ -13,8 +13,9 @@ layout: default
 .chessboard {
     width: 720px;
     height: 720px;
-    margin: -60px;
     border: 25px solid #333;
+    margin-left: auto;
+    margin-right: auto;
 }
 .black {
     float: left;

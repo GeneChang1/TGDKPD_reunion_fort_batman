@@ -12,7 +12,6 @@ layout: default
 - Mom and Pop welcome, stories about there first family reunions.  Recap of some of the great Leuck get togethers. 
 
 
-
 ### Tuesday Family Night
 > Family History night.  What better way to unite in reunion spirit then talk about us, explore our similarities and get excited about our differences.  A night of stories on how we all came together as Leuck's, plus some games on our similarities and differences.
 - Learn the "Leuck Song"
