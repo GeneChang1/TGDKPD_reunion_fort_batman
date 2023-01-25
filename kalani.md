@@ -22,7 +22,6 @@ layout: default
     width: 90px;
     height: 90px;
     background-color: #666;
-      font-size:50px;
     text-align:center;
     display: table-cell;
     vertical-align:middle;
@@ -32,7 +31,6 @@ layout: default
     width: 90px;
     height: 90px;
     background-color: #aaa;
-    font-size:50px;
     text-align:center;
     display: table-cell;
     vertical-align:middle;
