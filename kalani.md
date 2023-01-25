@@ -13,7 +13,7 @@ layout: default
 .chessboard {
     width: 720px;
     height: 720px;
-    margin: -60px;
+    margin: 330px;
     border: 25px solid #333;
 }
 .dark {
