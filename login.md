@@ -1,4 +1,27 @@
 <form id="userForm">
+<script>
+userForm {
+    width: 400px;
+    margin: auto;
+    padding: 10px;
+    text-align: left;
+    font-family: Helvetica, sans-serif;
+}
+userForm label {
+    font-weight: bold;
+    display: block;
+}
+userForm input {
+    margin-top: 5px;
+    padding: 5px;
+    width: 100%;
+}
+userForm input[type="submit"] {
+    margin-top: 10px;
+    background-color: #62dcaa;
+    color: #ffffff;
+}
+</script>
     <label>
         Name:
         <input type="text" name="name" id="name">
