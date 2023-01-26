@@ -14,7 +14,7 @@
         list-style: none;
         float: left;
         width: 20%;
-        height: 300px;
+        height: 200px;
         background-image: url(images/chessEndgameEx.png);
         background-repeat: no-repeat;
         background-size: 100%;
@@ -31,6 +31,7 @@
         line-height: 50px;
         background: white;
         text-align: center;
+        color: black;
     }
     @media screen and (max-width:1200px){
         .container ul li{
