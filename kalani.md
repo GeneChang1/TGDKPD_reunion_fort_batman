@@ -13,7 +13,7 @@ layout: default
 .chessboard {
     width: 720px;
     height: 720px;
-    margin: -60px;
+    margin: 0 330px;
     border: 25px solid #333;
 }
 .dark {
@@ -21,7 +21,6 @@ layout: default
     width: 90px;
     height: 90px;
     background-color: #666;
-      font-size:50px;
     text-align:center;
     display: table-cell;
     vertical-align:middle;
@@ -31,7 +30,6 @@ layout: default
     width: 90px;
     height: 90px;
     background-color: #aaa;
-    font-size:50px;
     text-align:center;
     display: table-cell;
     vertical-align:middle;
@@ -41,7 +39,6 @@ layout: default
     width: 90px;
     height: 90px;
     background-color: #f0ff00;
-    font-size:50px;
     text-align:center;
     display: table-cell;
     vertical-align:middle;
