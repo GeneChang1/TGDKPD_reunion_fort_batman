@@ -27,6 +27,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  color: white
 }
 .profile-header img {
   width: 150px;
@@ -47,7 +48,12 @@
 }
 .profile-info p {
   margin-bottom: 20px;
-  text-color
+}
+.profile-win h5 {
+  color: green;
+}
+.profile-loss h5 {
+  color: red;
 }
 .profile-info li {
   list-style: none;
@@ -57,16 +63,20 @@
 
 <div class="profile-container">
   <div class="profile-header">
-    <h1>John Doe</h1>
+    <h1>User 1</h1>
   </div>
   <div class="profile-info">
     <h2>About Me</h2>
     <p>I am a great Tic-Tac-Toe player but not the best chess player.</p>
     <h2>Recent Gameplay</h2>
       <li>Tic-Tac-Toe:</li> 
-      <li>W</li>
+      <div class="profile-win">
+        <li>W</li>
+      </div>
       <li>Chess:</li> 
-      <li>L</li>
+      <div class="profile-loss">
+        <li>L</li>
+      </div>
     <h2>Total Wins</h2>
       <li>Tic-Tac-Toe:</li> 
       <li>
