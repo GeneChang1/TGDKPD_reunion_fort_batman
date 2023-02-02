@@ -4,5 +4,6 @@ description: "Team T.G.DKP site and blog."
 gitorg: "https://github.com/jm1021/leuck_reunion"
 description: "Chess game"
 google_analytics:
+# remote_theme: pages-themes/hacker@v0.2.0
 plugins:
 - jekyll-remote-theme
