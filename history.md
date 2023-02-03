@@ -54,14 +54,5 @@
         <li><div class="title">Player 1 vs Player 3</div></li>
     </ul>
 </div>
-<table>
-    <tr>
-        <td>Players</td>
-        <td>Moves</td>
-    </tr>
-    <tr>
-        <td><p style="color:red">Toby</p> <p>vs</p> <p style="color:green">Dash</p></td>
-        <td>3</td>
-    </tr>
-</table>
 <script src="assets/js/history.js"></script>
+
