@@ -70,13 +70,11 @@
     <p>I am a great Tic-Tac-Toe player but not the best chess player.</p>
     <h2>Recent Gameplay</h2>
       <li>Tic-Tac-Toe:</li> 
-      <div class="profile-win">
-        <li>W</li>
-      </div>
-      <li>Chess:</li> 
-      <div class="profile-loss">
-        <li>L</li>
-      </div>
+        <li>
+          <p class="text-success">W</p>
+        </li>
+      <li>Chess:</li>
+        <li><p class="text-danger">L</p></li>
     <h2>Total Wins</h2>
       <li>Tic-Tac-Toe:</li> 
       <li>
