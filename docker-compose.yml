@@ -1,0 +1,18 @@
+version: '3'
+services:
+      web:
+              image: tngc_flask_v1
+              build: .
+              ports:
+                      - "8078:8080"
+              volumes:
+                      - persistent_volume:/app/volumes
+              restart: unless-stopped
+volumes:
+  persistent_volume:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/ubuntu/p3t6_tngc/volumes
+
