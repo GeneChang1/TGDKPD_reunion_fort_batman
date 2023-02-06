@@ -11,8 +11,8 @@ layout: default
 <style type="text/css">
 
 .chessboard {
-    width: 720px;
-    height: 720px;
+    width: 770px;
+    height: 770px;
     margin: 0 330px;
     border: 25px solid #333;
 }
@@ -177,19 +177,19 @@ layout: default
         let localColor = "";
         // assigns chess piece codes to their emoji 
         let chessPieces = {
-            wP: "https://user-images.githubusercontent.com/111609656/211652465-ed79ab00-e038-459a-99ae-31fcd770379c.png",
+            wP: "https://user-images.githubusercontent.com/111609656/217071573-b89fe06e-7fcf-40d3-a3f5-24b2df70fce3.png",
             wR: "https://user-images.githubusercontent.com/111609656/211652996-c0172ff0-be0a-4dbb-bb88-3171928d002e.png",
             wN: "https://user-images.githubusercontent.com/111609656/211653992-32ec4aa8-0efc-461c-ad3f-d920a7de3409.png",
             wB: "https://user-images.githubusercontent.com/111609656/211654176-b3c7d962-1b34-44be-9517-2bacbccbb0fe.png",
             wQ: "https://user-images.githubusercontent.com/111609656/211654354-0f620469-cc9e-4e53-ba86-4f6016a99946.png",
             wK: "https://user-images.githubusercontent.com/111609656/211654476-3a8ddc05-829d-4811-9dc9-9fa6b6a7e462.png",
             OO: "",
-            bP: "https://user-images.githubusercontent.com/111609656/211784497-79850d37-9666-41e1-bc81-5cb9b8becea1.png",
-            bR: "https://user-images.githubusercontent.com/111609656/211785224-44d3331d-1c23-4f9b-8b57-b8cb22a35ad7.png",
-            bN: "https://user-images.githubusercontent.com/111609656/211785423-30a117d0-5217-4f90-8632-a35d06182765.png",
-            bB: "https://user-images.githubusercontent.com/111609656/211785559-87619dcd-9225-4d71-9807-58e2bfb7b9c1.png",
-            bQ: "https://user-images.githubusercontent.com/111609656/211785666-0fad7801-bf94-4da7-9b40-a0675421b9e6.png",
-            bK: "https://user-images.githubusercontent.com/111609656/211785742-301835f0-cc33-4499-9364-c44461471ea5.png",
+            bP: "https://user-images.githubusercontent.com/111609656/217072392-9a967316-4586-49ee-af8f-96e647b5c4b3.png",
+            bR: "https://user-images.githubusercontent.com/111609656/217072096-d46f93df-3551-4c80-bdde-bf1dfd5a02e9.png",
+            bN: "https://user-images.githubusercontent.com/111609656/217072624-82d3041b-9155-4156-9416-c46208003c34.png",
+            bB: "https://user-images.githubusercontent.com/111609656/217072996-5b761454-fd67-4c89-992d-cdf1c231b437.png",
+            bQ: "https://user-images.githubusercontent.com/111609656/217073405-b9658d90-d668-4888-9a44-147788689d52.png",
+            bK: "https://user-images.githubusercontent.com/111609656/217073322-94943efa-a2d8-4579-ab23-cee9ea17b367.png",
         }
         //move counter
         let turn = 0;
