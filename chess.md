@@ -184,12 +184,12 @@ layout: default
             wQ: "https://user-images.githubusercontent.com/111609656/217149240-2f8e9f11-2704-40b2-94a8-b14670b36dda.png",
             wK: "https://user-images.githubusercontent.com/111609656/217149237-14eacace-d8f1-4c6d-bf4c-59169f7cfbf3.png",
             OO: "",
-            bP: "https://user-images.githubusercontent.com/111609656/217072392-9a967316-4586-49ee-af8f-96e647b5c4b3.png",
-            bR: "https://user-images.githubusercontent.com/111609656/217072096-d46f93df-3551-4c80-bdde-bf1dfd5a02e9.png",
-            bN: "https://user-images.githubusercontent.com/111609656/217072624-82d3041b-9155-4156-9416-c46208003c34.png",
-            bB: "https://user-images.githubusercontent.com/111609656/217072996-5b761454-fd67-4c89-992d-cdf1c231b437.png",
-            bQ: "https://user-images.githubusercontent.com/111609656/217073405-b9658d90-d668-4888-9a44-147788689d52.png",
-            bK: "https://user-images.githubusercontent.com/111609656/217073322-94943efa-a2d8-4579-ab23-cee9ea17b367.png",
+            bP: "https://user-images.githubusercontent.com/111609656/217159745-c92d8368-206d-4c94-ac21-dbf53b231361.png",
+            bR: "https://user-images.githubusercontent.com/111609656/217159750-a6d36405-9bea-4a15-a907-5e6a8f18024a.png",
+            bN: "https://user-images.githubusercontent.com/111609656/217159743-247f6125-fb62-4e7c-abe4-b104156f519f.png",
+            bB: "https://user-images.githubusercontent.com/111609656/217159737-a9c0df5f-0716-4915-b112-91eb254bad85.png",
+            bQ: "https://user-images.githubusercontent.com/111609656/217159747-4eaf5833-f3df-4b86-9bff-1a91a4dbfcf3.png",
+            bK: "https://user-images.githubusercontent.com/111609656/217159740-ef2994a2-3e67-4cb2-9471-00fc883789fd.png",
         }
         //move counter
         let turn = 0;
