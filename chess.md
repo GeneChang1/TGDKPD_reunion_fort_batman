@@ -178,11 +178,11 @@ layout: default
         // assigns chess piece codes to their emoji 
         let chessPieces = {
             wP: "https://user-images.githubusercontent.com/111609656/217071573-b89fe06e-7fcf-40d3-a3f5-24b2df70fce3.png",
-            wR: "https://user-images.githubusercontent.com/111609656/211652996-c0172ff0-be0a-4dbb-bb88-3171928d002e.png",
-            wN: "https://user-images.githubusercontent.com/111609656/211653992-32ec4aa8-0efc-461c-ad3f-d920a7de3409.png",
-            wB: "https://user-images.githubusercontent.com/111609656/211654176-b3c7d962-1b34-44be-9517-2bacbccbb0fe.png",
-            wQ: "https://user-images.githubusercontent.com/111609656/211654354-0f620469-cc9e-4e53-ba86-4f6016a99946.png",
-            wK: "https://user-images.githubusercontent.com/111609656/211654476-3a8ddc05-829d-4811-9dc9-9fa6b6a7e462.png",
+            wR: "https://user-images.githubusercontent.com/111609656/217149242-f921fbdc-10fe-4cc8-a3dc-e11874f80342.png",
+            wN: "https://user-images.githubusercontent.com/111609656/217149238-5915e9c8-321c-4854-bc15-4bb6908a7895.png",
+            wB: "https://user-images.githubusercontent.com/111609656/217149235-08bef402-7b72-4838-9c29-82c9ab50cdd7.png",
+            wQ: "https://user-images.githubusercontent.com/111609656/217149240-2f8e9f11-2704-40b2-94a8-b14670b36dda.png",
+            wK: "https://user-images.githubusercontent.com/111609656/217149237-14eacace-d8f1-4c6d-bf4c-59169f7cfbf3.png",
             OO: "",
             bP: "https://user-images.githubusercontent.com/111609656/217072392-9a967316-4586-49ee-af8f-96e647b5c4b3.png",
             bR: "https://user-images.githubusercontent.com/111609656/217072096-d46f93df-3551-4c80-bdde-bf1dfd5a02e9.png",
