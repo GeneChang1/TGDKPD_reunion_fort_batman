@@ -13,11 +13,9 @@ layout: default
           font-size: 40px;
           font-weight: 700;
           color: #302f2f;
-          font-family: verdana;
           text-align: center;
         }
         input.login {
-          font-family: verdana;
           margin-top: 5%;
           position: inline;
           width: 40%;
@@ -33,7 +31,6 @@ layout: default
         button {
           outline: none;
           -webkit-tap-highlight-color: transparent;
-          font-family: verdana;
           font-size: 20px;
           margin-top: 4%; 
           margin-bottom: 4%;
@@ -57,7 +54,6 @@ layout: default
           text-align: center;
         }
         #noacc {
-          font-family: verdana;
           font-size: 25px;
           text-align: center;
           margin-bottom: 0%;          
