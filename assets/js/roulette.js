@@ -1,119 +1,115 @@
-window.addEventListener('DOMContentLoaded', () => {
-    const tiles = Array.from(document.querySelectorAll('.tile'));
-    const playerDisplay = document.querySelector('.display-player');
-    const resetButton = document.querySelector('#reset');
-    const announcer = document.querySelector('.announcer');
+const gamearea = document.querySelector('.gamearea');
+const score  = createEle(gamearea,'div','Score :','score');
+const btn = createEle(gamearea,'button','Spin','btn');
+const message = createEle(gamearea,'div','Press Spin','message');
+const output = createEle(gamearea,'div','','output');
+const game = {x:7,y:9,coins:50,sel:[],eles:[],winner:false,styler:['black','white']};
+const total = game.x * game.y;
+btn.disabled = true;
+btn.addEventListener('click',spinner);
 
-    let board = ['', '', '', '', '', '', '', '', ''];
-    let currentPlayer = 'X';
-    let isGameActive = true;
+createBoard();
+updateScore();
 
-    const PLAYERX_WON = 'PLAYERX_WON';
-    const PLAYERO_WON = 'PLAYERO_WON';
-    const TIE = 'TIE';
+function spinner(){
+    btn.disabled = true;
+    const ranVal = Math.floor(Math.random()*total)+1;
+    console.log(ranVal);
+    game.winner = ranVal-1;
+    game.styler = [game.eles[ranVal-1].style.backgroundColor,game.eles[ranVal-1].style.color];
+    const win = game.sel.includes(ranVal);
+    console.log(win);
+
+    const eles = output.querySelectorAll('.bet');
+    eles.forEach((el)=>{
+        el.remove();
+        console.log(el);
+    })
+    if(win){
+        const winAmount = total;
+        game.coins += winAmount;
+        message.innerHTML = `Winner on ${ranVal} you won ${winAmount}`;
+        createEle(game.eles[ranVal-1],'div','$','bet');
+        game.eles[ranVal-1].style.backgroundColor ='green';
+    }else{
+        message.innerHTML = `Lost sorry you did not bet on ${ranVal}`; 
+        game.eles[ranVal-1].style.backgroundColor ='purple';
+    }
+    game.sel = [];
+    updateScore();
+
+    game.eles.forEach((el)=>{
+        el.bet = false;
+    })
+
+}
 
 
-    const winningConditions = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-    ];
-
-    // check if the board is won
-    function handleResultValidation() {
-        let roundWon = false;
-        for (let i = 0; i <= 7; i++) {
-            const winCondition = winningConditions[i];
-            const a = board[winCondition[0]];
-            const b = board[winCondition[1]];
-            const c = board[winCondition[2]];
-            if (a === '' || b === '' || c === '') {
-                continue;
+function createBoard(){
+    for(let i=0;i<total;i++){
+        const temp = createEle(output,'div',`${i+1}`,'box');
+        if(i%2){
+            temp.style.backgroundColor = 'red';
+        }else{
+            temp.style.backgroundColor = 'black';  
+            temp.style.color = 'white';
+        }
+        game.eles.push(temp);
+        temp.bet = false;
+        temp.addEventListener('click',(e)=>{
+            btn.disabled = false;
+            if(game.winner){
+                const parTemp = game.eles[game.winner];
+                parTemp.style.backgroundColor = game.styler[0];
+                parTemp.style.color = game.styler[1];  
+                game.winner = false;
+                const bets = parTemp.querySelector('.bet');
+                if(bets) {bets.remove();}
             }
-            if (a === b && b === c) {
-                roundWon = true;
-                break;
+            console.log(temp.textContent);
+            if(temp.bet){
+                console.log(game.winner);
+                const bets = temp.querySelector('.bet');
+                bets.remove();
+                //console.log(bets);
+                temp.bet = false;
+                game.coins++;
+                const index = game.sel.indexOf(i+1);
+                if(index > -1){
+                    game.sel.splice(index,1);
+                }
+            }else{
+                game.sel.push(i+1);
+                game.coins--;
+                temp.bet = true;
+                createEle(temp,'div','$','bet');
             }
-        }
-
-        // if round is won display that player won using inner html
-    if (roundWon) {
-            announce(currentPlayer === 'X' ? PLAYERX_WON : PLAYERO_WON);
-            isGameActive = false;
-            return;
-        }
-// no winner announce tie
-    if (!board.includes(''))
-        announce(TIE);
+            updateScore();
+        },true);
     }
-// use js switch case statement to set the html of the current winner
-    const announce = (type) => {
-        switch(type){
-            case PLAYERO_WON:
-                announcer.innerHTML = 'Player <span class="playerO">O</span> Won';
-                break;
-            case PLAYERX_WON:
-                announcer.innerHTML = 'Player <span class="playerX">X</span> Won';
-                break;
-            case TIE:
-                announcer.innerText = 'Tie';
-        }
-        announcer.classList.remove('hide');
-    };
-// make sure user enters an x or an o
-    const isValidAction = (tile) => {
-        if (tile.innerText === 'X' || tile.innerText === 'O'){
-            return false;
-        }
+    output.style.setProperty(`grid-template-columns`,`repeat(${game.x},1fr)`)
+}
 
-        return true;
-    };
-// update the board w the input value
-    const updateBoard =  (index) => {
-        board[index] = currentPlayer;
-    }
-// switch players after each turn
-    const changePlayer = () => {
-        playerDisplay.classList.remove(`player${currentPlayer}`);
-        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-        playerDisplay.innerText = currentPlayer;
-        playerDisplay.classList.add(`player${currentPlayer}`);
-    }
-// everytime a user enters an imput handle the input accordingly and put in the table check for a winner if not move to next turn
-    const userAction = (tile, index) => {
-        if(isValidAction(tile) && isGameActive) {
-            tile.innerText = currentPlayer;
-            tile.classList.add(`player${currentPlayer}`);
-            updateBoard(index);
-            handleResultValidation();
-            changePlayer();
-        }
-    }
-    // reset board after game end/page loads
-    const resetBoard = () => {
-        board = ['', '', '', '', '', '', '', '', ''];
-        isGameActive = true;
-        announcer.classList.add('hide');
 
-        if (currentPlayer === 'O') {
-            changePlayer();
-        }
 
-        tiles.forEach(tile => {
-            tile.innerText = '';
-            tile.classList.remove('playerX');
-            tile.classList.remove('playerO');
-        });
-    }
 
-    tiles.forEach( (tile, index) => {
-        tile.addEventListener('click', () => userAction(tile, index));
-    });
-// add listeners for clicking box on board
-    resetButton.addEventListener('click', resetBoard);
-});
+function updateScore(){
+    score.innerHTML = `Coins : ${game.coins}`;
+    console.log(game.sel);
+}
+
+
+function createEle(parent,eleType,html,eleClass){
+    const ele = document.createElement(eleType);
+    ele.innerHTML = html;
+    ele.classList.add(eleClass);
+    return parent.appendChild(ele);
+}
+
+
+/*
+const div = document.createElement('div');
+div.innerHTML  = 'Hello World';
+div.classList.add('myClass');
+gamearea.append(div);
+*/
