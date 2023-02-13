@@ -593,7 +593,7 @@ class pawn extends piece{
             lettersOnBoard[lettersOnBoard.indexOf(currentPosition[0]) + 1] + this.position[1]
         ];
         possibleEnPassants.forEach((c) => {
-            if (chessBoard[c][1] != undefined && chessBoard[c][0][1] == "P"){
+            if (chessBoard[c] != undefined && chessBoard[c][0][1] == "P"){
                 if (chessBoard[c][1].doubleMoved == 1 && chessBoard[c][1].lastMovedOn == turn - 2){
                     enPassants.push(c[0] + (parseInt(c[1]) + 1 * this.direction));
                 }

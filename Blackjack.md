@@ -1,7 +1,36 @@
+<html lang="en">
+    <head>
+        <!-- imports bootstrap styling library -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- CSS only -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+        />
+
 <html>
 
 <head>
     <style>
+@import url('https://fonts.googleapis.com/css?family=Chakra+Petch');
+html, body{
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+	background: black;
+	font-family: 'Chakra Petch', sans-serif;
+	color: #ffffff;
+	padding: 15px;
+	overflow-x: hidden;
+	max-width: 100%;
+}
         .myDiv {
             margin:100px
         }
@@ -16,6 +45,17 @@
         clear: both;
         display: table;
         }
+        p.introduction {
+        }
+        p.introduction span {
+        background-color: #000000;
+        color: #FFFFFF;
+        border-radius: 25px;
+        padding: 0 5px 0 5px;
+        }
+        .textalert {
+        text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -29,17 +69,26 @@
         </div>
     </div>
 <div class="myDiv">
-    <div>
-        <p id="Dealer">Dealer's cards are ??</p>
-        <p id="Player">Your cards are ??</p>
-        <p id="DealerScore">The Dealer's score is: ??</p>
-        <p id="PlayerScore">Your score is: ??</p>
+    <div class="myDiv">
+        <p id="Dealer" class="introduction">Dealer's cards are: <span>??</span></p>
+        <p id="Player" class="introduction">Your cards are: <span>??</span></p>
+        <p id="DealerScore" class="introduction">The Dealer's score is: <span>??</span></p>
+        <p id="PlayerScore" class="introduction">Your score is: <span>??</span></p>
         <div>
-            <img id="start" src="https://dashpen.github.io/blog/images/start.png"/>
-            <img id="hit" src="https://dashpen.github.io/blog/images/hit.png"/>
-            <img id="stand" src="https://dashpen.github.io/blog/images/stand.png"/>
-            <img id="win" style="visibility: hidden;" src="https://dashpen.github.io/blog/images/win.png"/>
-            <img id="lose" style="visibility: hidden;" src="https://dashpen.github.io/blog/images/lose.png"/>
+            <!-- <img id="start" src="https://dashpen.github.io/blog/images/start.png"/> -->
+            <button type="button" class="btn btn-dark btn-lg" id="start">START</button>
+            <!-- <img id="hit" src="https://dashpen.github.io/blog/images/hit.png"/> -->
+            <button type="button" class="btn btn-success btn-lg" id="hit" >HIT</button>
+            <!-- <img id="stand" src="https://dashpen.github.io/blog/images/stand.png"/> -->
+            <button type="button" class="btn btn-warning btn-lg" id="stand">STAND</button>
+            <!-- <img id="win" style="visibility: hidden;" src="https://dashpen.github.io/blog/images/win.png"/> -->
+            <div id="win" style="visibility:hidden;" class="alert alert-success" role="alert">
+                <p class="textalert">YOU LOSE</p>
+            </div>
+            <!-- <img id="lose" style="visibility: hidden;" src="https://dashpen.github.io/blog/images/lose.png"/> -->
+            <div id="lose" style="visibility: hidden;" class="alert alert-danger" role="alert">
+                <p class="textalert">YOU LOSE</p>
+            </div>
             <img id="push" style="visibility: hidden;" src="https://dashpen.github.io/blog/images/push.png"/>
             <script>
             

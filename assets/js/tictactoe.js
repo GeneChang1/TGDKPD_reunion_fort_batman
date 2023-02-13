@@ -24,6 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
         [2, 4, 6]
     ];
 
+    // check if the board is won
     function handleResultValidation() {
         let roundWon = false;
         for (let i = 0; i <= 7; i++) {
@@ -40,16 +41,17 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // if round is won display that player won using inner html
     if (roundWon) {
             announce(currentPlayer === 'X' ? PLAYERX_WON : PLAYERO_WON);
             isGameActive = false;
             return;
         }
-
+// no winner announce tie
     if (!board.includes(''))
         announce(TIE);
     }
-
+// use js switch case statement to set the html of the current winner
     const announce = (type) => {
         switch(type){
             case PLAYERO_WON:
@@ -63,7 +65,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         announcer.classList.remove('hide');
     };
-
+// make sure user enters an x or an o
     const isValidAction = (tile) => {
         if (tile.innerText === 'X' || tile.innerText === 'O'){
             return false;
@@ -71,18 +73,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
         return true;
     };
-
+// update the board w the input value
     const updateBoard =  (index) => {
         board[index] = currentPlayer;
     }
-
+// switch players after each turn
     const changePlayer = () => {
         playerDisplay.classList.remove(`player${currentPlayer}`);
         currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
         playerDisplay.innerText = currentPlayer;
         playerDisplay.classList.add(`player${currentPlayer}`);
     }
-
+// everytime a user enters an imput handle the input accordingly and put in the table check for a winner if not move to next turn
     const userAction = (tile, index) => {
         if(isValidAction(tile) && isGameActive) {
             tile.innerText = currentPlayer;
@@ -92,7 +94,7 @@ window.addEventListener('DOMContentLoaded', () => {
             changePlayer();
         }
     }
-    
+    // reset board after game end/page loads
     const resetBoard = () => {
         board = ['', '', '', '', '', '', '', '', ''];
         isGameActive = true;
@@ -112,6 +114,6 @@ window.addEventListener('DOMContentLoaded', () => {
     tiles.forEach( (tile, index) => {
         tile.addEventListener('click', () => userAction(tile, index));
     });
-
+// add listeners for clicking box on board
     resetButton.addEventListener('click', resetBoard);
 });

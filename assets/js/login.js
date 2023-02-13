@@ -15,29 +15,42 @@ const options = {
 
 document.getElementById("userForm").onsubmit = function(event){
     event.preventDefault()
+    const allowedChars = "1234567890!@#$%^&*()qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM`~"
+    function checkChars(string) {
+        var regex = new RegExp('[^' + allowedChars + ']', 'g');
+        var newstr = string.replace(regex, '');
+        if (newstr === string){
+            return true
+        } else return false
+    }
 
-    var name = document.getElementById("name").value
-    var password = document.getElementById("password").value
-    var passwordConfirm = document.getElementById("passwordConfirm").value
+    var nameRaw = document.getElementById("name").value.toString()
+    var name;
+
+    if (checkChars(nameRaw)){
+        name = nameRaw
+    } else {
+        alert("Username contains invalid characters")
+        return
+    }
+
+    var passwordRaw = document.getElementById("password").value.toString()
+    var password;
+
+    if (checkChars(passwordRaw)){
+        password = passwordRaw
+    } else {
+        alert("Password contains invalid characters")
+        return
+    }
+
+    var passwordConfirm = document.getElementById("passwordConfirm").value.toString()
     var dob = document.getElementById("dob").value
     var values = [name, password, dob]
 
-
-    var maxId = 0
-    fetch(url, {method: 'GET', mode: 'no-cors', headers:{'Content-Type': 'application/json',}})
-    .then(response => response.json().then(data => {
-        data.forEach(element => {
-            if(element.uid > maxId){
-                maxId = element.uid
-            }
-        })
-    }))
-    .then(response => console.log(response))
-    .catch(err => console.error(err))
-
     // only run if passwords match
     if(password === passwordConfirm){
-        var data = `{ name: "${name}", password: "${password}", dob: "${dob}", uid: "${maxId + 1}"}`
+        var data = `{ name: "${name}", password: "${password}", dob: "${dob}""}`
         fetch(url + "create", {
             method: 'POST',
             headers:{
