@@ -4,6 +4,7 @@ layout: default
 
 <html>
 
+
 <head>
 <meta charset="UTF-8"> 
 <title>Chessboard</title>
@@ -328,3 +329,4 @@ layout: default
         }
 </script>
 </html>
+

@@ -618,6 +618,9 @@ class pawn extends piece{
         })
         return captures;
     }
+    get promotion(){
+        let position 
+    }
 }
 class king extends piece{
     constructor(_position, _color){

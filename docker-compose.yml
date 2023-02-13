@@ -1,10 +1,10 @@
 version: '3'
 services:
       web:
-              image: tngc_flask_v1
+              image: fort_batman
               build: .
               ports:
-                      - "8078:8080"
+                      - "8038:8080"
               volumes:
                       - persistent_volume:/app/volumes
               restart: unless-stopped
@@ -14,5 +14,5 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/ubuntu/p3t6_tngc/volumes
+      device: /home/ubuntu//volumes
 
