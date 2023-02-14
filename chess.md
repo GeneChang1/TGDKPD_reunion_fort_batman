@@ -296,7 +296,6 @@ html, body{
         // response.json().then(data => {
         //     console.log(data);
         // })
-    })
 </script>
 </html>
 
