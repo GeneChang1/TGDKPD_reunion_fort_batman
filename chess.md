@@ -264,21 +264,22 @@ layout: default
             document.getElementById('container').appendChild(endgame)
             document.getElementById('endgame').appendChild(newGame)
         }
-        const url = "https://tngc.nighthawkcodescrums.gq/api/chess_users"
-        let options = {
-            mode = 'CORS'
-            body = JSON.stringify(moves);
-            method = 'POST'
-            }
-        fetch(url + "/update_game/<>", options)
-        .then(response => {
-        if (response.status !== 200) {
-          console.log(errorMsg);
-          return;
-        }
-        response.json().then(data => {
-            console.log(data);
-        })
+        console.log(JSON.stringify(moves))
+        // const url = "https://tngc.nighthawkcodescrums.gq/api/server1/put"
+        // let options = {
+        //     mode = 'CORS'
+        //     body = JSON.stringify(moves);
+        //     method = 'POST'
+        //     }
+        // fetch(url + "/update_game/<>", options)
+        // .then(response => {
+        // if (response.status !== 200) {
+        //   console.log(errorMsg);
+        //   return;
+        // }
+        // response.json().then(data => {
+        //     console.log(data);
+        // })
     })
 </script>
 </html>
