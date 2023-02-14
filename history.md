@@ -1,5 +1,17 @@
 # History
 <style>
+    @import url('https://fonts.googleapis.com/css?family=Chakra+Petch');
+html, body{
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+	background: black;
+	font-family: 'Chakra Petch', sans-serif;
+	color: #ffffff;
+	padding: 15px;
+	overflow-x: hidden;
+	max-width: 100%;
+}
     .container {
         width:90%;
         overflow: hidden;
