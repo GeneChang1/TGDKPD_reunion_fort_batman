@@ -1,7 +1,7 @@
 //placeholder for api link
-const url = "http://127.0.0.1:5000/api/chess_users/"
+const url = "https://tngc.nighthawkcodescrums.gq/api/chess_users/"
 const options = {
-    method: 'GET',
+    method: 'POST',
     cache: 'default',
     credentials: 'omit',
     headers: {
