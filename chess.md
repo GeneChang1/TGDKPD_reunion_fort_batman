@@ -35,7 +35,25 @@ html, body{
 <script>
     lettersOnBoard = "abcdefgh";
     let gameMoves = [];
+    const url = "https://tngc.nighthawkcodescrums.gq/api/server"
     //useful functions
+    function apiStart(){
+        let options = {
+            mode :'CORS',
+            body : "does it work?",
+            method :'POST'
+            }
+        fetch(url + "/post", options)
+        .then(response => {
+        if (response.status !== 200) {
+          console.log(errorMsg);
+          return;
+        }
+        response.json().then(data => {
+            console.log(data);
+        })
+        })
+    }
     function getKeyByValue(object, value, type) {
         if (type == 1){
             return Object.keys(object).find(key => object[key] === value);
@@ -70,6 +88,7 @@ html, body{
             }
     }
     function startGame(){
+        apiStart()
         var chessBoardDiv = document.createElement('div')
         chessBoardDiv.id = "chessBoard"
         chessBoardDiv.classList.add('chessboard')
