@@ -19,6 +19,18 @@
 
 <head>
     <style>
+@import url('https://fonts.googleapis.com/css?family=Chakra+Petch');
+html, body{
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+	background: black;
+	font-family: 'Chakra Petch', sans-serif;
+	color: #ffffff;
+	padding: 15px;
+	overflow-x: hidden;
+	max-width: 100%;
+}
         .myDiv {
             margin:100px
         }
@@ -40,6 +52,9 @@
         color: #FFFFFF;
         border-radius: 25px;
         padding: 0 5px 0 5px;
+        }
+        .textalert {
+        text-align: center;
         }
     </style>
 </head>
@@ -66,8 +81,14 @@
             <button type="button" class="btn btn-success btn-lg" id="hit" >HIT</button>
             <!-- <img id="stand" src="https://dashpen.github.io/blog/images/stand.png"/> -->
             <button type="button" class="btn btn-warning btn-lg" id="stand">STAND</button>
-            <img id="win" style="visibility: hidden;" src="https://dashpen.github.io/blog/images/win.png"/>
-            <img id="lose" style="visibility: hidden;" src="https://dashpen.github.io/blog/images/lose.png"/>
+            <!-- <img id="win" style="visibility: hidden;" src="https://dashpen.github.io/blog/images/win.png"/> -->
+            <div id="win" style="visibility:hidden;" class="alert alert-success" role="alert">
+                <p class="textalert">YOU LOSE</p>
+            </div>
+            <!-- <img id="lose" style="visibility: hidden;" src="https://dashpen.github.io/blog/images/lose.png"/> -->
+            <div id="lose" style="visibility: hidden;" class="alert alert-danger" role="alert">
+                <p class="textalert">YOU LOSE</p>
+            </div>
             <img id="push" style="visibility: hidden;" src="https://dashpen.github.io/blog/images/push.png"/>
             <script>
             
