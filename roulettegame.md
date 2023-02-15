@@ -1,6 +1,5 @@
 <html>
 <head>
-  <title>JavaScript Game</title>
   <style>
     @import url('https://fonts.googleapis.com/css?family=Chakra+Petch');
 html, body{
@@ -47,10 +46,10 @@ html, body{
 <body>
   <div class="gamearea">
   </div>
-  <script src="game1.js"></script>
 </body>
 </html>
 <script>
+    <!-- defining the variables -->
     const gamearea = document.querySelector('.gamearea');
     const score  = createEle(gamearea,'div','Score :','score');
     const btn = createEle(gamearea,'button','Spin','btn');
@@ -58,12 +57,12 @@ html, body{
     const output = createEle(gamearea,'div','','output');
     const game = {x:7,y:9,coins:50,sel:[],eles:[],winner:false,styler:['black','white']};
     const total = game.x * game.y;
-    btn.disabled = true;
+    <!-- when spin is clicked spunner fuction is called, then createboard and update score create board and update score -->
     btn.addEventListener('click',spinner);
     createBoard();
     updateScore();
+    <!-- generates ran number,number is saved then checks if player bet on chosen square, then removes bet elements -->
     function spinner(){
-        btn.disabled = true;
         const ranVal = Math.floor(Math.random()*total)+1;
         console.log(ranVal);
         game.winner = ranVal-1;
@@ -75,35 +74,46 @@ html, body{
             el.remove();
             console.log(el);
         })
+        <!-- if player wins, winamount is set equal to # of squares on board -->
         if(win){
             const winAmount = total;
+            <!-- adds win amount to player -->
             game.coins += winAmount;
+            <!-- changes message -->
             message.innerHTML = `Winner on ${ranVal} you won ${winAmount}`;
+            <!-- changes square to green -->
             createEle(game.eles[ranVal-1],'div','$','bet');
             game.eles[ranVal-1].style.backgroundColor ='green';
         }else{
+            <!-- changes message to loss, winning square turns purp -->
             message.innerHTML = `Lost sorry you did not bet on ${ranVal}`; 
             game.eles[ranVal-1].style.backgroundColor ='purple';
         }
+        <!-- clears bet squares , updates score-->
         game.sel = [];
         updateScore();
         game.eles.forEach((el)=>{
             el.bet = false;
         })
     }
+    <!--creating the actual board -->
 function createBoard(){
+    <!-- for loop to make board and adds function to squares -->
     for(let i=0;i<total;i++){
+        <!-- calls function to create new div -->
         const temp = createEle(output,'div',`${i+1}`,'box');
+        <!-- alternates red and black for squares -->
         if(i%2){
             temp.style.backgroundColor = 'red';
         }else{
             temp.style.backgroundColor = 'black';  
             temp.style.color = 'white';
         }
+        <!-- adds to array sets bet to false,  -->
         game.eles.push(temp);
         temp.bet = false;
         temp.addEventListener('click',(e)=>{
-            btn.disabled = false;
+            <!-- if there was winner resets the board -->
             if(game.winner){
                 const parTemp = game.eles[game.winner];
                 parTemp.style.backgroundColor = game.styler[0];
@@ -113,6 +123,7 @@ function createBoard(){
                 if(bets) {bets.remove();}
             }
             console.log(temp.textContent);
+            <!-- adds et and removes bet, changes coin count based on additon/rmoval of bet -->
             if(temp.bet){
                 console.log(game.winner);
                 const bets = temp.querySelector('.bet');
@@ -135,6 +146,7 @@ function createBoard(){
     }
     output.style.setProperty(`grid-template-columns`,`repeat(${game.x},1fr)`)
 }
+<!-- updates player coin value and displays on age -->
 function updateScore(){
     score.innerHTML = `Coins : ${game.coins}`;
     console.log(game.sel);
