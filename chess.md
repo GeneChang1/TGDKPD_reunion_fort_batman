@@ -33,17 +33,20 @@ html, body{
 <script src="assets/js/chessLogic.js">
 </script>
 <script>
+    let color = true;
+    let moving = false;
     lettersOnBoard = "abcdefgh";
     let gameMoves = [];
+    let localColor;
     const url = "https://tngc.nighthawkcodescrums.gq/api/server"
     //useful functions
-    function apiStart(){
-        let options = {
+    function apiStartGame(){
+        var options = {
             mode :'cors',
             body : "does it work?",
             method :'POST'
             }
-        fetch(url + "/post", options)
+        fetch(url + "/start", options)
         .then(response => {
         if (response.status !== 200) {
           console.log(errorMsg);
@@ -54,6 +57,42 @@ html, body{
         })
         })
     }
+    function gameSearch(){
+        database = [];
+        var options = {
+            mode : 'cors',
+            method: 'GET'
+        }
+        var searchOptions = {
+            mode : 'cors',
+            body : "searching",
+            method: 'POST'
+        }
+        fetch(url + "/", options)
+        .then(response => {
+            if (response.status !== 200) {
+                console.log(errorMsg);
+                return;
+            }
+            response.json().then(data => {
+                console.log(data)
+                if (data == "searching")
+                    localColor = "b";
+                })
+            if (localColor != "b"){
+                localColor = "w"
+                fetch(url + "/search", searchOptions)
+                .then(response => {
+                if (response.status !== 200) {
+                    console.log(errorMsg);
+                    return;
+                } 
+            })
+            }
+        })
+        console.log(database)
+    }
+    // startGame()
     function getKeyByValue(object, value, type) {
         if (type == 1){
             return Object.keys(object).find(key => object[key] === value);
@@ -71,8 +110,6 @@ html, body{
     function movePiece(currentM, newM){
             chessBoard[currentM][1].move(newM, currentM)
     }
-        let color = true;
-        let moving = false;
     function putOnBoard(id) {
             document.getElementById(id + "i").src = chessPieces[chessBoard[id][0][0]+chessBoard[id][0][1]];
             document.getElementById(id).style.fontSize = "60px";
@@ -88,7 +125,7 @@ html, body{
             }
     }
     function startGame(){
-        apiStart()
+        // apiStartGame()
         var chessBoardDiv = document.createElement('div')
         chessBoardDiv.id = "chessBoard"
         chessBoardDiv.classList.add('chessboard')
@@ -215,7 +252,7 @@ html, body{
         }
         putBoard()
         }
-        startGame()
+        // startGame()
         function move(div){
             var id = div.id
             if (!moving && div.children[0].src[8] == "u" && turnMoveCheck(id)){
@@ -238,8 +275,6 @@ html, body{
                 putBoard();
                 if (endGameBool){setTimeout(() => endGame(localColor), 0)}
                 moving = false;
-                if (turn == 0){localColor = "w"}
-                if (turn == 1){localColor = "b"}
                 turn += 1;
                 currentM = [];
             }else{
@@ -252,10 +287,10 @@ html, body{
             }
         }
         function turnMoveCheck(id){
-            if (turn % 2 == 1 && chessBoard[id][0][0] == "b"){
+            if (turn % 2 == 1 && chessBoard[id][0][0] == "b" && localColor == "b"){
                 return true
             }
-            if (turn % 2 == 0 && chessBoard[id][0][0] == "w"){
+            if (turn % 2 == 0 && chessBoard[id][0][0] == "w" && localColor == "w"){
                 return true
             }
             else {
@@ -315,6 +350,8 @@ html, body{
         // response.json().then(data => {
         //     console.log(data);
         // })
+</script>
+<script>
 </script>
 </html>
 
