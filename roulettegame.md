@@ -49,7 +49,7 @@ html, body{
 </body>
 </html>
 <script>
-    <!-- defining the variables -->
+    <!-- defining the variabless -->
     const gamearea = document.querySelector('.gamearea');
     const score  = createEle(gamearea,'div','Score :','score');
     const btn = createEle(gamearea,'button','Spin','btn');
