@@ -39,7 +39,7 @@ html, body{
     //useful functions
     function apiStart(){
         let options = {
-            mode :'CORS',
+            mode :'cors',
             body : "does it work?",
             method :'POST'
             }
