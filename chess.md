@@ -43,8 +43,8 @@ html, body{
     let gameMoves = [];
     let localColor;
     var lastMove = []
-    //const url = "https://tngc.nighthawkcodescrums.gq/api/server"
-    const url = "http://10.8.136.159:8087/api/server"
+    const url = "https://tngc.nighthawkcodescrums.gq/api/server"
+    // const url = "http://10.8.136.159:8087/api/server"
     //useful functions
     function globalIDs(){
         gid = document.getElementById("gid").value
