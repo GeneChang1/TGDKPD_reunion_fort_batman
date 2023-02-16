@@ -48,6 +48,7 @@ document.getElementById("userForm").onsubmit = function(event){
 
 
     var values = [name, password]
+    var passwordConfirm = document.getElementById("passwordConfirm").value.toString()
 
     // only run if passwords match
     if(password === passwordConfirm){
