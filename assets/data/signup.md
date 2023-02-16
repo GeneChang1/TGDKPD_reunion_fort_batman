@@ -13,7 +13,7 @@ permalink: /signup
         Password:
         <input type="password" name="password" id="password" required="" />
     </label></p>
-    <p><button>Login</button></p>
+    <button>Login</button>
     <p id="message"></p>
 </form>
 <script>
