@@ -1,7 +1,9 @@
 //placeholder for api link
-const url = "http://127.0.0.1:5000/api/chess_users/"
+// const url = 'http://172.17.66.185:8087/api/chess_users/'
+// const url = 'http://localhost:8069/api/chess_users/'
+const url = 'https://tngc.nighthawkcodescrums.gq/api/chess_users/'
 const options = {
-    method: 'GET',
+    method: 'POST',
     cache: 'default',
     credentials: 'omit',
     headers: {
@@ -50,16 +52,17 @@ document.getElementById("userForm").onsubmit = function(event){
 
     // only run if passwords match
     if(password === passwordConfirm){
-        var data = `{ name: "${name}", password: "${password}", dob: "${dob}""}`
+        var data = `{ "name": "${name}", "password": "${password}", "dob": "${dob}"}`
+        var data2 = JSON.parse(data)
         fetch(url + "create", {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data2)
         })
         .then(response => response.json().then(data => {
-            
+            console.log(data)
         })
         )
         .then(response => console.log(response))
