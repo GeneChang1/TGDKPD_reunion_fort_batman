@@ -197,10 +197,12 @@ td div {
   content: '';
   width: 60px;
   height: 10px;
-  position: absolute;
+  top: 0px;
+  left: 0px;
+  position: absolute;  
   border-radius: 5px;
   background: #ffffff;
-  transform: rotate(90deg);
+  transform: rotate(270deg);
 }
 </style>
 
