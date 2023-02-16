@@ -59,6 +59,7 @@ document.getElementById("userForm").onsubmit = function(event){
         })
          .then(response => response.json().then(data => {
             console.log(data)
+            
         })
          )
         // .then(response => console.log(response))
