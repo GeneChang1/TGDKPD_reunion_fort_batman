@@ -2,7 +2,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="main.css">
-	<title>Battleship</title>
+    <h1>Battleship</h1>
 </head>
 <body>
 	<div id="board">
@@ -90,7 +90,6 @@
 			</tr>
 		</table>
 	</div>
-	<script src="battleship.js"></script>
 </body>
 </html>
 
@@ -135,6 +134,7 @@ td {
 	height: 70px;
 	border: 2px solid #ffffff;
 	border-radius: 15px;
+	text-align: center;
 }
 td:hover {
 	background: #58595b;
@@ -146,7 +146,7 @@ td div {
 .numbers, .letters {
 	text-align: center;
 	font-size: 20px;
-	color: #000000;
+	color: #ffffff;
 	height: 40px;
 	width: 40px;
 	border: none;
@@ -197,10 +197,12 @@ td div {
   content: '';
   width: 60px;
   height: 10px;
-  position: absolute;
+  top: 0px;
+  left: 0px;
+  position: absolute;  
   border-radius: 5px;
   background: #ffffff;
-  transform: rotate(90deg);
+  transform: rotate(270deg);
 }
 </style>
 
@@ -325,7 +327,7 @@ var controller = {
 			var hit = model.fire(location);
 			if (hit && model.shipsSunk === model.numShips) {
 				view.displayMessage("You sunk all of my battleships in " + this.guesses + " tries.");
-				var end = document.getElementById("guessInput").disabled = true;
+var end = document.getElementById("guessInput").disabled = true;
 			}
 		}
 	}
@@ -350,3 +352,79 @@ function answer(eventObj) {
 	controller.processGuess(location);
 }
 </script>
+<html>
+  <head>
+    <title>Leaderboard</title>
+    <style>
+      #score-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+      #username-input, #score-input {
+        padding: 5px;
+        margin-right: 10px;
+      }
+      #submit-button {
+        padding: 5px;
+        background-color: #000000;
+        color: white;
+        border-style: solid;
+		border-color: white;
+		border-size: 1px;
+        cursor: pointer;
+      }
+      #message {
+        margin-top: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Battleship Leaderboard</h2>
+    <table>
+      <tr>
+        <th>Rank</th>
+        <th>Username</th>
+        <th>Score</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Parav</td>
+        <td>17</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Kalani</td>
+        <td>22</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Dinesh</td>
+        <td>48</td>
+      </tr>
+    </table>
+    <div id="score-form">
+      <input type="text" id="username-input" placeholder="Enter username">
+      <input type="number" id="score-input" placeholder="Enter score">
+      <button id="submit-button">Submit</button>
+    </div>
+    <div id="message"></div>
+    <script>
+      const submitButton = document.getElementById('submit-button');
+      submitButton.addEventListener('click', () => {
+        const usernameInput = document.getElementById('username-input');
+        const scoreInput = document.getElementById('score-input');
+        const message = document.getElementById('message');
+        if (usernameInput.value && scoreInput.value) {
+          message.textContent = `Score submitted for ${usernameInput.value}`;
+          usernameInput.value = '';
+          scoreInput.value = '';
+        } else {
+          message.textContent = 'Please enter both username and score';
+        }
+      });
+    </script>
+  </body>
+</html>

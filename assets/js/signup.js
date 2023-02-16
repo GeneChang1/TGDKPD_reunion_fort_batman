@@ -16,15 +16,15 @@ const options = {
 // }
 
 document.getElementById("userForm").onsubmit = function(event){
-    event.preventDefault()
-    const allowedChars = "1234567890!@#$%^&*()qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM`~"
-    function checkChars(string) {
-        var regex = new RegExp('[^' + allowedChars + ']', 'g');
-        var newstr = string.replace(regex, '');
-        if (newstr === string){
-            return true
-        } else return false
-    }
+    // event.preventDefault()
+    // const allowedChars = "1234567890!@#$%^&*()qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM`~"
+    // function checkChars(string) {
+    //     var regex = new RegExp('[^' + allowedChars + ']', 'g');
+    //     var newstr = string.replace(regex, '');
+    //     if (newstr === string){
+    //         return true
+    //     } else return false
+    // }
 
     var nameRaw = document.getElementById("name").value.toString()
     var name;
@@ -46,31 +46,26 @@ document.getElementById("userForm").onsubmit = function(event){
         return
     }
 
-    var passwordConfirm = document.getElementById("passwordConfirm").value.toString()
-    var dob = document.getElementById("dob").value
-    var values = [name, password, dob]
 
-    // only run if passwords match
-    if(password === passwordConfirm){
-        var data = `{ "name": "${name}", "password": "${password}", "dob": "${dob}"}`
+    var values = [name, password]
+
+        var data = `{ "name": "${name}", "password": "${password}"}`
         var data2 = JSON.parse(data)
-        fetch(url + "create", {
+        fetch(url + "Authenticate", {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data2)
         })
-        .then(response => response.json().then(data => {
-            console.log(data)
-        })
-        )
-        .then(response => console.log(response))
-        .catch(err => console.error(err))
-        alert("stored data: " +data)
-    } else {
-        alert("Passwords don't match!")
-    }
+        // .then(response => response.json().then(data => {
+        //     console.log(data)
+        // })
+        // )
+        // .then(response => console.log(response))
+        // .catch(err => console.error(err))
+        // alert("stored data: " +data)
+
     // var data = `{ name: "dash", password: "pass", dob: "123"}`
     // console.log(data)
     // fetch(url + "create", {
