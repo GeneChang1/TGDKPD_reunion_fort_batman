@@ -63,6 +63,8 @@ document.getElementById("userForm").onsubmit = function(event){
         })
         .then(response => response.json().then(data => {
             console.log(data)
+            localStorage.getItem("userid", uid)
+            localStorage.getItem("userid")
         })
         )
         .then(response => console.log(response))

@@ -51,17 +51,16 @@ document.getElementById("userForm").onsubmit = function(event){
 
         var data = `{ "name": "${name}", "password": "${password}"}`
         var data2 = JSON.parse(data)
-        fetch(url + "Authenticate", {
-            method: 'POST',
+        fetch(url + "/", {
+            method: 'GET',
             headers:{
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data2)
         })
-        // .then(response => response.json().then(data => {
-        //     console.log(data)
-        // })
-        // )
+         .then(response => response.json().then(data => {
+            console.log(data)
+        })
+         )
         // .then(response => console.log(response))
         // .catch(err => console.error(err))
         // alert("stored data: " +data)
