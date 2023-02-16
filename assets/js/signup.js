@@ -16,15 +16,15 @@ const options = {
 // }
 
 document.getElementById("userForm").onsubmit = function(event){
-    event.preventDefault()
-    const allowedChars = "1234567890!@#$%^&*()qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM`~"
-    function checkChars(string) {
-        var regex = new RegExp('[^' + allowedChars + ']', 'g');
-        var newstr = string.replace(regex, '');
-        if (newstr === string){
-            return true
-        } else return false
-    }
+    // event.preventDefault()
+    // const allowedChars = "1234567890!@#$%^&*()qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM`~"
+    // function checkChars(string) {
+    //     var regex = new RegExp('[^' + allowedChars + ']', 'g');
+    //     var newstr = string.replace(regex, '');
+    //     if (newstr === string){
+    //         return true
+    //     } else return false
+    // }
 
     var nameRaw = document.getElementById("name").value.toString()
     var name;
@@ -48,7 +48,6 @@ document.getElementById("userForm").onsubmit = function(event){
 
 
     var values = [name, password]
-    // only run if passwords match
 
         var data = `{ "name": "${name}", "password": "${password}"}`
         var data2 = JSON.parse(data)
