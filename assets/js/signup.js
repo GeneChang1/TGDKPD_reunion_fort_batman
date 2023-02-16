@@ -48,10 +48,8 @@ document.getElementById("userForm").onsubmit = function(event){
 
 
     var values = [name, password]
-    var passwordConfirm = document.getElementById("passwordConfirm").value.toString()
-
     // only run if passwords match
-    if(password === passwordConfirm){
+
         var data = `{ "name": "${name}", "password": "${password}"}`
         var data2 = JSON.parse(data)
         fetch(url + "Authenticate", {
@@ -68,9 +66,7 @@ document.getElementById("userForm").onsubmit = function(event){
         .then(response => console.log(response))
         .catch(err => console.error(err))
         alert("stored data: " +data)
-    } else {
-        alert("Passwords don't match!")
-    }
+
     // var data = `{ name: "dash", password: "pass", dob: "123"}`
     // console.log(data)
     // fetch(url + "create", {
