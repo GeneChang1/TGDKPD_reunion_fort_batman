@@ -7,7 +7,7 @@ permalink: /signup
 <form action="javascript:login_user()">
     <p><label>
         User ID:
-        <input type="text" name="uid" id="uid" required="" />
+        <input type="text" name="name" id="name" required="" />
     </label></p>
     <p><label>
         Password:
@@ -25,7 +25,7 @@ permalink: /signup
     const login_url = url + '/api/chess_users/';
     function login_user(){
         const body = {
-            uid: document.getElementById("name").value,
+            name: document.getElementById("name").value,
             password: document.getElementById("password").value,
         };
         const requestOptions = {
@@ -52,7 +52,7 @@ permalink: /signup
             response.json().then(data => {
                 const message = 'Login success: ' + data.name;
                 document.getElementById("message").innerHTML = message;
-                localStorage.setItem("uid", data.uid);
+                localStorage.setItem("name", data.name);
                 localStorage.setItem("visitor", data.name);
             })
         })
