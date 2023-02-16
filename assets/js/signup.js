@@ -58,13 +58,13 @@ document.getElementById("userForm").onsubmit = function(event){
             },
             body: JSON.stringify(data2)
         })
-        .then(response => response.json().then(data => {
-            console.log(data)
-        })
-        )
-        .then(response => console.log(response))
-        .catch(err => console.error(err))
-        alert("stored data: " +data)
+        // .then(response => response.json().then(data => {
+        //     console.log(data)
+        // })
+        // )
+        // .then(response => console.log(response))
+        // .catch(err => console.error(err))
+        // alert("stored data: " +data)
 
     // var data = `{ name: "dash", password: "pass", dob: "123"}`
     // console.log(data)
