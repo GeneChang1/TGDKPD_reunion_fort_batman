@@ -39,58 +39,53 @@ html, body{
     let gameMoves = [];
     let localColor;
     const url = "https://tngc.nighthawkcodescrums.gq/api/server"
+    // const url = "http://127.0.0.1:8087/api/server"
     //useful functions
-    function apiStartGame(){
+    function joinGame(gid){
         var options = {
-            mode :'cors',
-            body : "does it work?",
-            method :'POST'
-            }
-        fetch(url + "/start", options)
+            mode : 'cors',
+            method: 'GET'
+        }
+        fetch(url + "/", options)
         .then(response => {
         if (response.status !== 200) {
           console.log(errorMsg);
           return;
         }
         response.json().then(data => {
-            console.log(data);
+            data.forEach((c) => {
+                c = JSON.parse(changeToJSONable(c))
+                console.log(c)
+                if (c[gid] != undefined){
+                    secondPlayerOptions ={
+                        mode : 'cors',
+                        method: 'POST',
+                        body: JSON.stringify(["uid", "gid"])
+                    }
+                    fetch(url + "/secondPlayer", secondPlayerOptions)
+                    .then(response => {
+                        if (response.status !== 200) {
+                            console.log(errorMsg);
+                        return;
+                        }
+                    })
+                    return;
+                }
+            })
         })
         })
     }
-    function gameSearch(){
-        database = [];
-        var options = {
-            mode : 'cors',
-            method: 'GET'
-        }
-        var searchOptions = {
-            mode : 'cors',
-            body : "searching",
-            method: 'POST'
-        }
-        fetch(url + "/", options)
-        .then(response => {
-            if (response.status !== 200) {
-                console.log(errorMsg);
-                return;
+    function createApiGame(){
+    }
+    function changeToJSONable(bad){
+        var good =""
+        bad.split("").forEach((c) => {
+            if (c != "'"){
+                good = good + c
             }
-            response.json().then(data => {
-                console.log(data)
-                if (data == "searching")
-                    localColor = "b";
-                })
-            if (localColor != "b"){
-                localColor = "w"
-                fetch(url + "/search", searchOptions)
-                .then(response => {
-                if (response.status !== 200) {
-                    console.log(errorMsg);
-                    return;
-                } 
-            })
-            }
+            else {good = good + '"'}
         })
-        console.log(database)
+        return good;
     }
     // startGame()
     function getKeyByValue(object, value, type) {
