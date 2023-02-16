@@ -102,7 +102,7 @@
 					/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
 				)
 		);
-		const api = isLocalhost ? "http://172.29.71.42:8087/api/roulette/" : "ENTER_UR_DEPLOYED_URL";
+		const api = isLocalhost ? "http://localhost:5000" : "ENTER_UR_DEPLOYED_URL";
 
         // This function is called when the user wants to load their game score.
         // It retrieves the value of the 'user' input field from the webpage and sends it as a query parameter to an API endpoint using a Fetch request.
@@ -230,12 +230,12 @@
 		function createAccount() {
 			game.coins = 50;
 			const user = document.getElementById("user").value;
-			fetch(api + "create", {
+			fetch(api + "/roulette", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({ user: user, score: game.coins }),
+				body: JSON.stringify({ user, score: game.coins }),
 			});
 			alert("Account created!");
 			score.innerHTML = `Coins : ${game.coins}`;
