@@ -2,7 +2,7 @@
 title: Python Sign-in
 layout: default
 description: A sign-in screen that interacts with Python and obtains a user.
-permalink: /login
+permalink: /signup
 ---
 <form action="javascript:login_user()">
     <p><label>
