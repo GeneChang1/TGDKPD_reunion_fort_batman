@@ -412,26 +412,6 @@ function answer(eventObj) {
     </div>
     <div id="message"></div>
     <script>
-		document.getElementById("userForm").onsubmit = function(event){
-    event.preventDefault()
-    var username = document.getElementById("username").value.toString()
-    var score = document.getElementById("score").value.toString()
-        var data = `{ "username": "${username}", "score": "${score}"}`
-        var data2 = JSON.parse(data)
-        fetch(url + "create", {
-            method: 'GET',
-            headers:{
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data2)
-        })
-        .then(response => response.json().then(data => {
-            console.log(data)
-        })
-        )
-        .then(response => console.log(response))
-        .catch(err => console.error(err))
-        alert("stored data: " +data)}
       const submitButton = document.getElementById('submit-button');
       submitButton.addEventListener('click', () => {
         const usernameInput = document.getElementById('username-input');
