@@ -30,6 +30,10 @@ html, body{
 
 <body id="body">
 </body>
+<input type='text' id="uid" placeholder="uid">
+<input type='text' id="gid" placeholder="gid">
+<button type="button" onclick="joinGame()">Join or Start Game</button>
+<button type="button" onclick="checkMove()">Check move</button>
 <script src="assets/js/chessLogic.js">
 </script>
 <script>
@@ -38,10 +42,55 @@ html, body{
     lettersOnBoard = "abcdefgh";
     let gameMoves = [];
     let localColor;
-    const url = "https://tngc.nighthawkcodescrums.gq/api/server"
-    // const url = "http://127.0.0.1:8087/api/server"
+    var lastMove = []
+    //const url = "https://tngc.nighthawkcodescrums.gq/api/server"
+    const url = "http://10.8.136.159:8087/api/server"
     //useful functions
-    function joinGame(gid){
+    function globalIDs(){
+        gid = document.getElementById("gid").value
+        localuid = document.getElementById("uid").value
+    }
+    function checkMove(){
+        let moveCheckOptions = {
+            mode : 'cors',
+            method : 'GET'
+        }
+        fetch(url + '/', moveCheckOptions)
+        .then(response => {
+            if (response.status !== 200) {
+            console.log(errorMsg);
+            return;
+            }
+            response.json().then(data => {
+            data.forEach((c) => {
+                if (c[[gid]] != undefined){
+                    var newMoves = [c[[gid]]["move1"], c[[gid]]["move2"]]
+                    if (lastMove != newMoves){
+                        chessBoard[newMoves[0]][1].move(newMoves[1], newMoves[0])
+                        putBoard()
+                        turn++
+                    }
+                }
+            })
+        })
+        })
+    }
+    function pushMove(currentM, newM){
+        let movePushOptions = {
+            mode : 'cors',
+            method: 'POST',
+            body : JSON.stringify([gid, currentM, newM])
+        }
+        fetch(url + '/pushMove', movePushOptions)
+        .then(response => {
+            if (response.status !== 200) {
+            console.log(errorMsg);
+            return;
+            }
+        })
+    }
+    function joinGame(){
+        globalIDs()
         var options = {
             mode : 'cors',
             method: 'GET'
@@ -53,39 +102,57 @@ html, body{
           return;
         }
         response.json().then(data => {
+            gameCreate = true;
             data.forEach((c) => {
-                c = JSON.parse(changeToJSONable(c))
-                console.log(c)
-                if (c[gid] != undefined){
-                    secondPlayerOptions ={
-                        mode : 'cors',
-                        method: 'POST',
-                        body: JSON.stringify(["uid", "gid"])
-                    }
-                    fetch(url + "/secondPlayer", secondPlayerOptions)
-                    .then(response => {
-                        if (response.status !== 200) {
-                            console.log(errorMsg);
+                try{
+                    if (c[[gid]] != undefined && c[[gid]]["uid2"] == 1234){
+                        addSecondPlayer(gid)
+                        gameCreate = false
                         return;
-                        }
-                    })
-                    return;
-                }
+                    }
+                    else {
+                        gameCreate = true
+                    }
+                } catch{}
             })
-        })
-        })
-    }
-    function createApiGame(){
-    }
-    function changeToJSONable(bad){
-        var good =""
-        bad.split("").forEach((c) => {
-            if (c != "'"){
-                good = good + c
+            if (gameCreate){
+                createNewGame(gid)
             }
-            else {good = good + '"'}
+            var gameID = gid;
         })
-        return good;
+        })
+        startGame()
+    }
+    function addSecondPlayer(gid){
+        localColor = "b"
+        secondPlayerOptions ={
+            mode : 'cors',
+            method: 'POST',
+            body: JSON.stringify([localuid, gid]),
+        }
+        fetch(url + "/secondPlayer", secondPlayerOptions)
+        .then(response => {
+            if (response.status !== 200) {
+                console.log(errorMsg);
+            return;
+            }
+        })
+        return;
+    }
+    function createNewGame(gid){
+        localColor = "w"
+        createGameOptions = {
+            mode : 'cors',
+            method: 'POST',
+            body : JSON.stringify({[gid] : {'uid1' : localuid, 'uid2' : 1234, 'move1' : 'move1', 'move2' : 'move2'}})
+        }
+        fetch(url + "/start", createGameOptions)
+        .then(response => {
+            if (response.status !== 200) {
+                console.log(errorMsg);
+            return;
+            }
+        })
     }
     // startGame()
     function getKeyByValue(object, value, type) {
@@ -104,6 +171,7 @@ html, body{
     }
     function movePiece(currentM, newM){
             chessBoard[currentM][1].move(newM, currentM)
+            pushMove(currentM, newM)
     }
     function putOnBoard(id) {
             document.getElementById(id + "i").src = chessPieces[chessBoard[id][0][0]+chessBoard[id][0][1]];
@@ -144,7 +212,6 @@ html, body{
             }
         }
         currentM = [];
-        localColor = "";
         // assigns chess piece codes to their emoji 
         chessPieces = {
             wP: "https://user-images.githubusercontent.com/111609656/217071573-b89fe06e-7fcf-40d3-a3f5-24b2df70fce3.png",
@@ -250,7 +317,7 @@ html, body{
         // startGame()
         function move(div){
             var id = div.id
-            if (!moving && div.children[0].src[8] == "u" && turnMoveCheck(id)){
+            if (!moving && div.children[0].src[8] == "u" && turnMoveCheck()){
                 moving = true
                 if (div.children[0].src[8] == "u"){
                     currentM.push(id);
@@ -276,16 +343,16 @@ html, body{
                 putBoard();
                 currentM = [];
                 moving = false;
-                if (div.children[0].src[8] == "u" && turnMoveCheck(id)){
+                if (div.children[0].src[8] == "u" && turnMoveCheck()){
                     move(id);
                 }
             }
         }
-        function turnMoveCheck(id){
-            if (turn % 2 == 1 && chessBoard[id][0][0] == "b" && localColor == "b"){
+        function turnMoveCheck(){
+            if (turn % 2 == 1 && localColor == "b"){
                 return true
             }
-            if (turn % 2 == 0 && chessBoard[id][0][0] == "w" && localColor == "w"){
+            if (turn % 2 == 0 && localColor == "w"){
                 return true
             }
             else {
@@ -310,7 +377,6 @@ html, body{
                     document.getElementById(thisId).remove()
                 }
             }   
-            console.log(JSON.stringify(gameMoves))
             document.getElementById("chessBoard").remove();
             var container = document.createElement('div');
             var endgame = document.createElement('div');
@@ -329,14 +395,13 @@ html, body{
             document.getElementById('container').appendChild(endgame)
             document.getElementById('endgame').appendChild(newGame)
         }
-        console.log(JSON.stringify(moves))
         // const url = "https://tngc.nighthawkcodescrums.gq/api/server1/put"
         // let options = {
         //     mode = 'CORS'
         //     body = JSON.stringify(moves);
         //     method = 'POST'
         //     }
-        // fetch(url + "/update_game/<>", options)
+        // fetch(url + "/update_game", options)
         // .then(response => {
         // if (response.status !== 200) {
         //   console.log(errorMsg);
