@@ -6,7 +6,6 @@ layout: default
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>LOGIN OR SIGN UP!</title>
     <style>
         h1 {
           text-align: center;
@@ -64,59 +63,17 @@ layout: default
   </head>
   <body>
     <h1 class="header">
-      LOG IN OR SIGN UP!
+      SIGN UP!
     </h1>
-    <input type="username" class="login" id="uname" placeholder="Enter username here..">
-    <input type="password" class="login" id="pwd" placeholder="Enter password here..">
-    <input type="birthday" class="login" id="dob" placeholder="Enter birthday here..">
-    <div>
-    <br>
-      <button id="enter" type="button" onclick="window.location.href='{{ site.baseurl }}/';">Log me in!</button>
-      <div class="newaccount">
-       <p id="noacc">Want to sign up for premium?</p>
+    <form>
+      <input type="username" class="login" id="name" placeholder="Enter username here..">
+      <input type="text" class="login" id="password" placeholder="Enter password here..">
+      <input type="text" class="login" id="passwordConfirm" placeholder="Confirm Password">
+      <input type="birthday" class="login" id="dob" placeholder="Enter birthday here..">
+      <div>
+        <button id="signUp" type="button" onclick="">Sign up</button>
       </div>
-      <button id="signup" type="button" onclick="window.location.href='{{ site.baseurl }}/signup';">Sign me right up!</button>
-    </div>
-    
+    </form>
+    <script src="assets/js/login.js"></script>
   </body>
-  <script>
-      // Get the input field
-      var input = document.getElementById("pwd");
-      // Execute a function when the user presses a key on the keyboard
-      input.addEventListener("keypress", function(event) {
-        // If the user presses the "Enter" key on the keyboard
-        if (event.key === "Enter") {
-          event.preventDefault();
-          // Trigger the button element with a click
-          document.getElementById("enter").click();
-        }
-      });
-    </script>
 </html>
-
-<body>
-  <h1 class="header">
-    SIGN UP!
-  </h1>
-  <input type="username" class="login" id="uname" placeholder="Enter username here..">
-  <input type="password" class="login" id="pwd" placeholder="Enter password here..">
-   <input type="password" class="login" id="pwd" placeholder="Confirm password..">
-  <div>
-  <br>
-    <button id="enter" type="button" onclick="window.location.href='{{ site.baseurl }}/';">Sign me up!</button>
-  </div>
-  
-</body>
-<script>
-    // Get the input field
-    var input = document.getElementById("pwd");
-    // Execute a function when the user presses a key on the keyboard
-    input.addEventListener("keypress", function(event) {
-      // If the user presses the "Enter" key on the keyboard
-      if (event.key === "Enter") {
-        event.preventDefault();
-        // Trigger the button element with a click
-        document.getElementById("enter").click();
-      }
-    });
-  </script>
