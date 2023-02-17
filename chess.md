@@ -30,7 +30,7 @@ html, body{
 
 <body id="body">
 </body>
-<input type='text' id="uid" placeholder="uid">
+<input type='text' id="uid" placeholder="username">
 <input type='text' id="gid" placeholder="gid">
 <button type="button" onclick="joinGame()">Join or Start Game</button>
 <button type="button" onclick="checkMove()">Check move</button>
@@ -75,11 +75,44 @@ html, body{
         })
         })
     }
+
     function pushMove(currentM, newM){
         let movePushOptions = {
             mode : 'cors',
             method: 'POST',
             body : JSON.stringify([gid, currentM, newM])
+        }
+        fetch(url + '/pushMove', movePushOptions)
+        .then(response => {
+            if (response.status !== 200) {
+            console.log(errorMsg);
+            return;
+            }
+        })
+    }
+    async function pushWinner(uid){
+        let moveCheckOptions = {
+            mode : 'cors',
+            method : 'GET'
+        }
+        var storedData
+        fetch(url + '/', moveCheckOptions).then
+        .then(response => {
+            if (response.status !== 200) {
+            console.log(errorMsg);
+            return;
+            }
+            response.json().then(data => {
+            data.forEach((c) => {
+                storedData = data
+                    console.log(c[[gid]])
+            })
+        })
+        })
+        let movePushOptions = {
+            mode : 'cors',
+            method: 'POST',
+            body : JSON.stringify([gid, uid])
         }
         fetch(url + '/pushMove', movePushOptions)
         .then(response => {
@@ -325,6 +358,7 @@ html, body{
             }
         }
         putBoard()
+        var chessInterval = setInterval(() => {   try {checkMove()} catch {console.log('heheheha')}}, 1000)
         }
         // startGame()
         function move(div){
@@ -406,6 +440,7 @@ html, body{
             document.getElementById('body').appendChild(container)
             document.getElementById('container').appendChild(endgame)
             document.getElementById('endgame').appendChild(newGame)
+            clearInterval(chessInterval)
         }
         // const url = "https://tngc.nighthawkcodescrums.gq/api/server1/put"
         // let options = {
