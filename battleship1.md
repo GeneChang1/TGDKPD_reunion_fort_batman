@@ -372,7 +372,7 @@ function answer(eventObj) {
         color: white;
         border-style: solid;
 		border-color: white;
-		border-size: 1px;
+		border-width: 1px;
         cursor: pointer;
       }
       #message {
@@ -386,23 +386,19 @@ function answer(eventObj) {
     <table>
       <tr>
         <th>Rank</th>
-        <th>Username</th>
         <th>Score</th>
       </tr>
       <tr>
         <td>1</td>
-        <td>Parav</td>
-        <td>17</td>
+        <td id="lowScore">17</td>
       </tr>
       <tr>
         <td>2</td>
-        <td>Kalani</td>
-        <td>22</td>
+        <td id="middleScore">22</td>
       </tr>
       <tr>
         <td>3</td>
-        <td>Dinesh</td>
-        <td>48</td>
+        <td id="highScore">48</td>
       </tr>
     </table>
     <div id="score-form">
@@ -417,14 +413,38 @@ function answer(eventObj) {
         const usernameInput = document.getElementById('username-input');
         const scoreInput = document.getElementById('score-input');
         const message = document.getElementById('message');
-        if (usernameInput.value && scoreInput.value) {
-          message.textContent = `Score submitted for ${usernameInput.value}`;
-          usernameInput.value = '';
-          scoreInput.value = '';
-        } else {
-          message.textContent = 'Please enter both username and score';
-        }
-      });
+		var data = {username: usernameInput.value, score: scoreInput.value};
+		data = JSON.parse(JSON.stringify(data))
+		console.log(data)
+		fetch('https://tngc.nighthawkcodescrums.gq/api/battleship_users/create',
+		{method: "POST", 
+		headers:{
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data)})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+		})
+		.catch(error => {
+			console.error(error);
+		});
+      })
+		fetch('https://tngc.nighthawkcodescrums.gq/api/battleship_users/scores', {
+            method: 'GET',
+            headers:{
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json().then(data => {
+            console.log(data)
+			document.getElementById("lowScore").innerHTML = data.lowScore
+			document.getElementById("middleScore").innerHTML = data.middleScore
+			document.getElementById("highScore").innerHTML = data.highScore
+        })
+        )
+        .then(response => console.log(response))
+        .catch(err => console.error(err))
     </script>
   </body>
 </html>
