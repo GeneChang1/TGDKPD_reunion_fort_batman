@@ -30,7 +30,7 @@ html, body{
 
 <body id="body">
 </body>
-<input type='text' id="uid" placeholder="uid">
+<input type='text' id="uid" placeholder="username">
 <input type='text' id="gid" placeholder="gid">
 <button type="button" onclick="joinGame()">Join or Start Game</button>
 <script src="assets/js/chessLogic.js">
@@ -74,11 +74,44 @@ html, body{
         })
         })
     }
+
     function pushMove(currentM, newM){
         let movePushOptions = {
             mode : 'cors',
             method: 'POST',
             body : JSON.stringify([gid, currentM, newM])
+        }
+        fetch(url + '/pushMove', movePushOptions)
+        .then(response => {
+            if (response.status !== 200) {
+            console.log(errorMsg);
+            return;
+            }
+        })
+    }
+    async function pushWinner(uid){
+        let moveCheckOptions = {
+            mode : 'cors',
+            method : 'GET'
+        }
+        var storedData
+        fetch(url + '/', moveCheckOptions).then
+        .then(response => {
+            if (response.status !== 200) {
+            console.log(errorMsg);
+            return;
+            }
+            response.json().then(data => {
+            data.forEach((c) => {
+                storedData = data
+                    console.log(c[[gid]])
+            })
+        })
+        })
+        let movePushOptions = {
+            mode : 'cors',
+            method: 'POST',
+            body : JSON.stringify([gid, uid])
         }
         fetch(url + '/pushMove', movePushOptions)
         .then(response => {
@@ -120,7 +153,6 @@ html, body{
             var gameID = gid;
         })
         })
-        startGame()
     }
     function addSecondPlayer(gid){
         localColor = "b"
@@ -136,6 +168,7 @@ html, body{
             return;
             }
         })
+        startGame()
         return;
     }
     function createNewGame(gid){
@@ -152,6 +185,7 @@ html, body{
             return;
             }
         })
+        startGame()
     }
     // startGame()
     function getKeyByValue(object, value, type) {
@@ -192,7 +226,7 @@ html, body{
         chessBoardDiv.id = "chessBoard"
         chessBoardDiv.classList.add('chessboard')
         document.getElementById("body").appendChild(chessBoardDiv)
-        if (localColor = "w"){
+        if (localColor == "w"){
             for (let i = 1; i < 9; i++){
                 for (j in lettersOnBoard){
                     var thisId = lettersOnBoard[j] + (9 - i);
@@ -203,7 +237,7 @@ html, body{
             }  
         }
         else {
-            for (let i = 0; i < 8; i++){
+            for (let i = 1; i < 9; i++){
                 for (j in lettersOnBoard){
                     var thisId = lettersOnBoard[j] + i;
                     var square = document.createElement('div')
@@ -324,6 +358,7 @@ html, body{
             }
         }
         putBoard()
+        var chessInterval = setInterval(() => {   try {checkMove()} catch {console.log('heheheha')}}, 1000)
         }
         // startGame()
         function move(div){
@@ -405,6 +440,7 @@ html, body{
             document.getElementById('body').appendChild(container)
             document.getElementById('container').appendChild(endgame)
             document.getElementById('endgame').appendChild(newGame)
+            clearInterval(chessInterval)
         }
         // const url = "https://tngc.nighthawkcodescrums.gq/api/server1/put"
         // let options = {
