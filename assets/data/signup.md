@@ -23,6 +23,8 @@ permalink: /signup
         event.preventDefault()
         console.log("Chase is Gay")
     }
+    document.getElementById("form").onsubmit = (event) => {
+        event.preventDefault()
     var url = "https://tngc.nighthawkcodescrums.gq"
     // Comment out next line for local testing
     //url = "http://localhost:8086"
