@@ -204,7 +204,7 @@ html, body{
             }  
         }
         else {
-            for (let i = 1; i < 9, i++){
+            for (let i = 1; i < 9; i++){
                 for (j in lettersOnBoard){
                     var thisId = lettersOnBoard[j] + i;
                     var square = document.createElement('div')
