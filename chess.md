@@ -154,7 +154,6 @@ html, body{
             var gameID = gid;
         })
         })
-        startGame()
     }
     function addSecondPlayer(gid){
         localColor = "b"
@@ -170,6 +169,7 @@ html, body{
             return;
             }
         })
+        startGame()
         return;
     }
     function createNewGame(gid){
@@ -186,6 +186,7 @@ html, body{
             return;
             }
         })
+        startGame()
     }
     // startGame()
     function getKeyByValue(object, value, type) {
@@ -226,7 +227,7 @@ html, body{
         chessBoardDiv.id = "chessBoard"
         chessBoardDiv.classList.add('chessboard')
         document.getElementById("body").appendChild(chessBoardDiv)
-        if (localColor = "w"){
+        if (localColor == "w"){
             for (let i = 1; i < 9; i++){
                 for (j in lettersOnBoard){
                     var thisId = lettersOnBoard[j] + (9 - i);
@@ -237,7 +238,7 @@ html, body{
             }  
         }
         else {
-            for (let i = 0; i < 8; i++){
+            for (let i = 1; i < 9; i++){
                 for (j in lettersOnBoard){
                     var thisId = lettersOnBoard[j] + i;
                     var square = document.createElement('div')
