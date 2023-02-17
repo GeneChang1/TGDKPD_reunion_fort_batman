@@ -136,8 +136,8 @@ html, body{
             return;
             }
         })
-        return;
         startGame()
+        return;
     }
     function createNewGame(gid){
         localColor = "w"
