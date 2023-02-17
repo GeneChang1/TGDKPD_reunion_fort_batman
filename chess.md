@@ -119,9 +119,9 @@ html, body{
                 createNewGame(gid)
             }
             var gameID = gid;
+        }).then(startGame())
         })
-        })
-        .then(startGame())
+
     }
     function addSecondPlayer(gid){
         localColor = "b"
