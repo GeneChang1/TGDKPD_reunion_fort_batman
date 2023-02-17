@@ -119,9 +119,8 @@ html, body{
                 createNewGame(gid)
             }
             var gameID = gid;
-        }).then(startGame())
         })
-
+        })
     }
     function addSecondPlayer(gid){
         localColor = "b"
@@ -138,6 +137,7 @@ html, body{
             }
         })
         return;
+        startGame()
     }
     function createNewGame(gid){
         localColor = "w"
@@ -153,6 +153,7 @@ html, body{
             return;
             }
         })
+        startGame()
     }
     // startGame()
     function getKeyByValue(object, value, type) {
