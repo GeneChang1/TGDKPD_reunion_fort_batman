@@ -43,13 +43,17 @@ html, body{
     let gameMoves = [];
     let localColor;
     var lastMove = []
-    const url = "https://tngc.nighthawkcodescrums.gq/api/server"
-    // const url = "http://10.8.136.159:8087/api/server"
+    var storedData
+    var chessInterval
+    // const url = "https://tngc.nighthawkcodescrums.gq/api/server"
+    const url = "http://172.17.73.247:8087/api/server"
+    const winnerUrl = 'http://172.17.73.247:8087/api/chess_users'
     //useful functions
     function globalIDs(){
         gid = document.getElementById("gid").value
         localuid = document.getElementById("uid").value
     }
+    
     function checkMove(){
         let moveCheckOptions = {
             mode : 'cors',
@@ -69,13 +73,20 @@ html, body{
                         chessBoard[newMoves[0]][1].move(newMoves[1], newMoves[0])
                         putBoard()
                         turn++
+                        if (chessBoard[newMoves[1][0][1] == "k"]){
+                            if (localColor == "b"){
+                                endGame("w")
+                            }
+                            else if (localColor =="w"){
+                                endGame("b")
+                            }
+                        }
                     }
                 }
             })
         })
         })
     }
-
     function pushMove(currentM, newM){
         let movePushOptions = {
             mode : 'cors',
@@ -90,36 +101,53 @@ html, body{
             }
         })
     }
-    async function pushWinner(uid){
+    async function pushWinner(winner){
         let moveCheckOptions = {
             mode : 'cors',
             method : 'GET'
         }
-        var storedData
-        fetch(url + '/', moveCheckOptions).then
+        fetch(url + '/', moveCheckOptions)
         .then(response => {
             if (response.status !== 200) {
             console.log(errorMsg);
             return;
             }
             response.json().then(data => {
+            console.log(data)
             data.forEach((c) => {
-                storedData = data
-                    console.log(c[[gid]])
+                if (c[[gid]] != undefined){
+                    console.log(c[gid])
+                    storedData = c[[gid]]
+                    postGame(winner)
+                }
+
             })
         })
         })
+        
+    }
+    function postGame(winner){
+        console.log(storedData)
+        storedData.winner = winner
+        var today = new Date()
+        today = today.getTime()
+        storedData.date = today
+        console.log(storedData)
         let movePushOptions = {
             mode : 'cors',
             method: 'POST',
-            body : JSON.stringify([gid, uid])
+            body : JSON.stringify(storedData)
         }
-        fetch(url + '/pushMove', movePushOptions)
+        fetch(winnerUrl + '/update_game', movePushOptions)
         .then(response => {
             if (response.status !== 200) {
-            console.log(errorMsg);
+            console.log(response);
             return;
             }
+            console.log(response)
+            response.json().then(data => {
+                console.log(data)
+            })
         })
     }
     function joinGame(){
@@ -359,7 +387,7 @@ html, body{
             }
         }
         putBoard()
-        var chessInterval = setInterval(() => {   try {checkMove()} catch {console.log('heheheha')}}, 1000)
+        chessInterval = setInterval(() => {   try {checkMove()} catch {console.log('heheheha')}}, 1000)
         }
         // startGame()
         function move(div){
@@ -419,6 +447,7 @@ html, body{
         }
         function endGame(color){
             for (let i = 1; i < 9; i++){
+
                 for (j in lettersOnBoard){
                     var thisId = lettersOnBoard[j] + i;
                     document.getElementById(thisId).remove()
@@ -442,6 +471,7 @@ html, body{
             document.getElementById('container').appendChild(endgame)
             document.getElementById('endgame').appendChild(newGame)
             clearInterval(chessInterval)
+            pushWinner(color)
         }
         // const url = "https://tngc.nighthawkcodescrums.gq/api/server1/put"
         // let options = {
