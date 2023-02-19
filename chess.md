@@ -33,7 +33,6 @@ html, body{
 <input type='text' id="uid" placeholder="username">
 <input type='text' id="gid" placeholder="gid">
 <button type="button" onclick="joinGame()">Join or Start Game</button>
-<button type="button" onclick="checkMove()">Check move</button>
 <script src="assets/js/chessLogic.js">
 </script>
 <script>
