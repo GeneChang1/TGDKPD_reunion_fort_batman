@@ -4,7 +4,8 @@ layout: default
 description: A sign-in screen that interacts with Python and obtains a user.
 permalink: /signup
 ---
-<form id="form">
+
+<form id="form" action="javascript:login_user()">
     <p><label>
         User ID:
         <input type="text" name="name" id="name" required="" />
@@ -65,6 +66,6 @@ permalink: /signup
                 localStorage.setItem("visitor", data.name);
                 console.log("Chase is Gaya")
             })
-        })
+        })}
     }
 </script>
