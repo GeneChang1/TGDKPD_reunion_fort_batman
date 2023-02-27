@@ -51,7 +51,6 @@ html, body{
         gid = document.getElementById("gid").value
         localuid = document.getElementById("uid").value
     }
-    
     function checkMove(){
         let moveCheckOptions = {
             mode : 'cors',
