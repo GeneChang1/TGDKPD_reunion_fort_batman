@@ -15,8 +15,7 @@ const options = {
 //     method: 'PUT',
 // }
 
-document.getElementById("userForm").onsubmit = function(event){
-    event.preventDefault()
+document.getElementById("signUp").onclick = function(){
     const allowedChars = "1234567890!@#$%^&*()qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM`~"
     function checkChars(string) {
         var regex = new RegExp('[^' + allowedChars + ']', 'g');
@@ -63,8 +62,6 @@ document.getElementById("userForm").onsubmit = function(event){
         })
         .then(response => response.json().then(data => {
             console.log(data)
-            localStorage.setItem("userid", uid)
-            localStorage.getItem("userid")
         })
         )
         .then(response => console.log(response))
