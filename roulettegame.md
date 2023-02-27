@@ -102,7 +102,7 @@
 					/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
 				)
 		);
-		const api = isLocalhost ? "http://localhost:5000" : "ENTER_UR_DEPLOYED_URL";
+		const api = isLocalhost ? "http://localhost:5000" : "https://tngc.nighthawkcodescrums.gq/api/chess_users/";
 
         // This function is called when the user wants to load their game score.
         // It retrieves the value of the 'user' input field from the webpage and sends it as a query parameter to an API endpoint using a Fetch request.
