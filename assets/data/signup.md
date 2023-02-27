@@ -5,9 +5,9 @@ description: A sign-in screen that interacts with Python and obtains a user.
 permalink: /signup
 ---
 
-<form action="javascript:login_user()">
+<form id="form" action="javascript:login_user()">
     <p><label>
-        name:
+        User ID:
         <input type="text" name="name" id="name" required="" />
     </label></p>
     <p><label>
@@ -31,7 +31,7 @@ permalink: /signup
     //url = "http://localhost:8086"
     // Authenticate endpoint
     const login_url = url + '/api/chess_users/';
-    let nameapi = function login_user(){
+    function login_user(){
         const body = {
             name: document.getElementById("name").value,
             password: document.getElementById("password").value,
@@ -43,7 +43,7 @@ permalink: /signup
             // credentials: 'include', // include, *same-origin, omit
             body: JSON.stringify(body),
             headers: {
-                "Content-type": "application/json",
+                "Content-Type": "application/json",
             },
         };
         fetch(login_url, requestOptions);
