@@ -43,7 +43,7 @@ permalink: /signup
             // credentials: 'include', // include, *same-origin, omit
             body: JSON.stringify(body),
             headers: {
-                "content-type": "application/json",
+                "Content-Type": "application/json",
             },
         };
         fetch(login_url, requestOptions);
