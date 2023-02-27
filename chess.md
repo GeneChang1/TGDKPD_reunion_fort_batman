@@ -42,11 +42,10 @@ html, body{
     let gameMoves = [];
     let localColor;
     var lastMove = []
-    var storedData
     var chessInterval
     // const url = "https://tngc.nighthawkcodescrums.gq/api/server"
-    const url = "http://172.17.73.247:8087/api/server"
-    const winnerUrl = 'http://172.17.73.247:8087/api/chess_users'
+    const url = "http://172.19.164.171:8087/api/server"
+    const winnerUrl = 'http://172.19.164.171:8087/api/chess_users'
     //useful functions
     function globalIDs(){
         gid = document.getElementById("gid").value
@@ -100,7 +99,7 @@ html, body{
             }
         })
     }
-    async function pushWinner(winner){
+    function pushWinner(winner){
         let moveCheckOptions = {
             mode : 'cors',
             method : 'GET'
@@ -116,8 +115,7 @@ html, body{
             data.forEach((c) => {
                 if (c[[gid]] != undefined){
                     console.log(c[gid])
-                    storedData = c[[gid]]
-                    postGame(winner)
+                    postGame(winner, c[[gid]])
                 }
 
             })
@@ -125,13 +123,23 @@ html, body{
         })
         
     }
-    function postGame(winner){
-        console.log(storedData)
+    function postGame(winner, storedData){
+
+        if (winner === 'w'){
+            winner = storedData.uid1
+        } else {
+            winner = storedData.uid2
+        }
+
         storedData.winner = winner
         var today = new Date()
         today = today.getTime()
         storedData.date = today
+        delete storedData.move1
+        delete storedData.move2
         console.log(storedData)
+        storedData = JSON.stringify(storedData)
+        storedData = JSON.parse(storedData)
         let movePushOptions = {
             mode : 'cors',
             method: 'POST',

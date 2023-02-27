@@ -1,7 +1,8 @@
 //placeholder for api link
 // const url = 'http://172.17.66.185:8087/api/chess_users/'
 // const url = 'http://localhost:8069/api/chess_users/'
-const url = 'https://tngc.nighthawkcodescrums.gq/api/chess_users/'
+const url = 'http://172.19.164.171:8087/api/chess_users/'
+// const url = 'https://tngc.nighthawkcodescrums.gq/api/chess_users/'
 const options = {
     method: 'POST',
     cache: 'default',
