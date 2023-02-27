@@ -69,6 +69,9 @@
             background-color: #bbbbbb;
             color: white;
         }
+        .clickable:hover {
+          cursor: pointer;
+        }
     </style>
 </head>
 <label for="search">Search:</label>
@@ -91,8 +94,8 @@
             <th>Player 1</th>
             <th>Player 2</th>
             <th>Winner</th>
-            <th>Moves</th>
             <th>Played On</th>
+            <th class="clickable" id="deleteAll" onclick="deleteEntry()">Delete</th>
         </tr>
     </table>
 </div>
