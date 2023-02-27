@@ -43,15 +43,14 @@ html, body{
     let localColor;
     var lastMove = []
     var chessInterval
-    // const url = "https://tngc.nighthawkcodescrums.gq/api/server"
-    const url = "http://172.19.164.171:8087/api/server"
+    const url = "https://tngc.nighthawkcodescrums.gq/api/server"
+    // const url = "http://172.19.164.171:8087/api/server"
     const winnerUrl = 'http://172.19.164.171:8087/api/chess_users'
     //useful functions
     function globalIDs(){
         gid = document.getElementById("gid").value
         localuid = document.getElementById("uid").value
     }
-    
     function checkMove(){
         let moveCheckOptions = {
             mode : 'cors',
@@ -117,20 +116,16 @@ html, body{
                     console.log(c[gid])
                     postGame(winner, c[[gid]])
                 }
-
             })
         })
         })
-        
     }
     function postGame(winner, storedData){
-
         if (winner === 'w'){
             winner = storedData.uid1
         } else {
             winner = storedData.uid2
         }
-
         storedData.winner = winner
         var today = new Date()
         today = today.getTime()
@@ -454,7 +449,6 @@ html, body{
         }
         function endGame(color){
             for (let i = 1; i < 9; i++){
-
                 for (j in lettersOnBoard){
                     var thisId = lettersOnBoard[j] + i;
                     document.getElementById(thisId).remove()
