@@ -14,7 +14,7 @@ permalink: /signup
         Password:
         <input type="password" name="password" id="password" required="" />
     </label></p>
-     <button onclick="window.location.href = 'https:/genechang1.github.io/TGDKPD_reunion_fort_batman/';">LOGIN</button>
+     <button onclick="window.location.href = 'genechang1.github.io/TGDKPD_reunion_fort_batman/';">LOGIN</button>
     <p id="message"></p>
 </form>
 
