@@ -40,7 +40,6 @@
 				text-align: center;
 				border: 1px solid #ddd;
 			}
-
 			h1 {
 				text-align: left;
 			}
@@ -50,14 +49,12 @@
 				margin-top: 10px;
 				margin-bottom: 0px;
 			}
-
-            .gamearea {
+            .gamearea1 {
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
             }
-
-            .gamearea >button {
+            .gamearea1 >button {
                 width: 100px;
             }
 		</style>
@@ -73,15 +70,15 @@
 		<button onclick="createAccount()">Create</button>
 		<hr />
 		<div class="gamearea"></div>
-		<script src="game1.js"></script></div>
+		<script src="assets/js/roulette.js"></script></div>
 	</body>
 	<script>
-		const gamearea = document.querySelector(".gamearea");
-		const score = createEle(gamearea, "div", "Score :", "score");
-		const btn = createEle(gamearea, "button", "Spin", "btn");
-		const message = createEle(gamearea, "div", "Press Spin", "message");
-		const output = createEle(gamearea, "div", "", "output");
-		const game = {
+		const gamearea1 = document.querySelector(".gamearea");
+		const score1 = createEle(gamearea1, "div", "Score :", "score");
+		const btn1 = createEle(gamearea1, "button", "Spin", "btn");
+		const message1 = createEle(gamearea1, "div", "Press Spin", "message");
+		const output1 = createEle(gamearea1, "div", "", "output");
+		const game1 = {
 			x: 7,
 			y: 9,
 			coins: 50,
@@ -90,7 +87,7 @@
 			winner: false,
 			styler: ["black", "white"],
 		};
-		const total = game.x * game.y;
+		const total1 = game.x * game.y;
 		btn.disabled = true;
 		btn.addEventListener("click", spinner);
 		createBoard();
@@ -102,8 +99,7 @@
 					/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
 				)
 		);
-		const api = isLocalhost ? "http://localhost:5000" : "ENTER_UR_DEPLOYED_URL";
-
+		const api = isLocalhost ? "http://localhost:8069/api" : "https://tngc.nighthawkcodescrums.gq/api/";
         // This function is called when the user wants to load their game score.
         // It retrieves the value of the 'user' input field from the webpage and sends it as a query parameter to an API endpoint using a Fetch request.
         // The API endpoint is expected to respond with a JSON object that includes the user's game score.

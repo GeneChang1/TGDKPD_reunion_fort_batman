@@ -4,6 +4,7 @@ layout: default
 description: A sign-in screen that interacts with Python and obtains a user.
 permalink: /signup
 ---
+
 <form id="form">
     <p><label>
         User ID:
@@ -42,10 +43,10 @@ permalink: /signup
             // credentials: 'include', // include, *same-origin, omit
             body: JSON.stringify(body),
             headers: {
-                "content-type": "application/json",
+                "Content-Type": "application/json",
             },
         };
-        fetch(login_url, requestOptions)
+        fetch(login_url, requestOptions);
         .then(response => {
             // trap error response from Web API
             if (response.status !== 200) {
@@ -53,9 +54,9 @@ permalink: /signup
                 document.getElementById("message").innerHTML = message;
                 localStorage.removeItem("name");
                 localStorage.removeItem("visitor");
-                return;
-                console.log("Chase is cool")
-                return('login successful')
+                return
+                console.log("Chase is cool");
+                return('login successful');
             }
             // Valid response will contain json data
             response.json().then(data => {
@@ -63,8 +64,8 @@ permalink: /signup
                 document.getElementById("message").innerHTML = message;
                 localStorage.setItem("name", data.name);
                 localStorage.setItem("visitor", data.name);
-                console.log("Chase is Gaya")
+                console.log("Chase is Gaya");
             })
-        })
+        })}
     }
 </script>
