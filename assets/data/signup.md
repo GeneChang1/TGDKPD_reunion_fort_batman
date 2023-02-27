@@ -14,7 +14,7 @@ permalink: /signup
         Password:
         <input type="password" name="password" id="password" required="" />
     </label></p>
-     <button onclick= login_user();">LOGIN</button>
+    <button>Login</button>
     <p id="message"></p>
 </form>
 
