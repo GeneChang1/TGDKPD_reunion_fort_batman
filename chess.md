@@ -43,8 +43,8 @@ html, body{
     let localColor;
     var lastMove = []
     var chessInterval
-    // const url = "https://tngc.nighthawkcodescrums.gq/api/server"
-    const url = "http://172.19.164.171:8087/api/server"
+    const url = "https://tngc.nighthawkcodescrums.gq/api/server"
+    // const url = "http://172.19.164.171:8087/api/server"
     const winnerUrl = 'http://172.19.164.171:8087/api/chess_users'
     //useful functions
     function globalIDs(){
