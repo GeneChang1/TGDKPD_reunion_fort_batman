@@ -208,6 +208,10 @@ td div {
 
 
 <script>
+
+// The model represents the game logic and contains the data and functions that manage the state of the game. 
+// It also has functions to fire at a location, check if a ship is sunk, generate random ship locations, and detect if there is a collision between ships.
+// This creates an object called model which contains properties for the game board size, number of ships, length of ships, and number of ships that have been sunk.
 var model = {
 	boardSize: 7,
 	numShips: 3,
@@ -218,9 +222,9 @@ var model = {
 		{ locations: [0, 0, 0], hits: ["", "", ""] },
 		{ locations: [0, 0, 0], hits: ["", "", ""] },
 		{ locations: [0, 0, 0], hits: ["", "", ""] }
-	],
-
-	fire: function(guess) {
+	], // This creates an array of three ship objects, each containing an array of ship locations and an array to track whether each location has been hit.
+	
+	fire: function(guess) { //This creates a method called fire that takes a guess parameter.
 		for (var i = 0; i < this.numShips; i++) {
 			var ship = this.ships[i];
 			var index = ship.locations.indexOf(guess); 
@@ -235,13 +239,15 @@ var model = {
 						view.displayMessage("You sunk my battleship!");
 						this.shipsSunk++;
 					}
-					return true;
+					return true; // This loops through each ship in the ships array to check if the guess matches one of the ship's locations. If it does, the corresponding hits array element is updated to "hit", and the isSunk method is called to check if the ship has been sunk. If the ship has been sunk, the shipsSunk count is incremented.
 				}
 		}
 		view.displayMiss(guess);
 		view.displayMessage("It's a miss!");
 		return false;
 	},
+
+// The view is responsible for displaying the game to the user. It contains functions to display messages, hits, and misses on the board.
 
 	isSunk: function(ship) {
 		for (i = 0; i < this.shipLength; i++) {
@@ -260,10 +266,10 @@ var model = {
 			} while (this.collision(locations));
 				this.ships[i].locations = locations;
 		}
-				console.log("Tablica okrętów: ");
+				console.log("");
 		console.log(this.ships);
-	},
-
+	}, 
+// These are methods for generating ship locations and checking if there is a collision between ships.
 	generateShip: function() {
 		var direction = Math.floor(Math.random() * 2);
 		var row, col;
@@ -318,6 +324,10 @@ var view = {
 		cell.setAttribute("class","miss");
 	}
 };
+
+// The controller acts as a connection between the model and the view. 
+// It contains a function to process user guesses and update the state of the game. 
+// It also contains a variable to keep track of the number of guesses made.
 
 var controller = {
 	guesses: 0,
@@ -390,7 +400,7 @@ function answer(eventObj) {
       </tr>
       <tr>
         <td>1</td>
-        <td id="lowScore">17</td>
+        <td id="highScore">17</td>
       </tr>
       <tr>
         <td>2</td>
@@ -398,7 +408,7 @@ function answer(eventObj) {
       </tr>
       <tr>
         <td>3</td>
-        <td id="highScore">48</td>
+        <td id="lowScore">48</td>
       </tr>
     </table>
     <div id="score-form">
@@ -430,12 +440,14 @@ function answer(eventObj) {
 			console.error(error);
 		});
       })
+		// The code also includes an event listener for a submit button that sends the user's username and score to a server using a POST request. 
 		fetch('https://tngc.nighthawkcodescrums.gq/api/battleship_users/scores', {
             method: 'GET',
             headers:{
                 'Content-Type': 'application/json',
             }
         })
+		// // There is also a GET request to retrieve high scores from the server.
         .then(response => response.json().then(data => {
             console.log(data)
 			document.getElementById("lowScore").innerHTML = data.lowScore
