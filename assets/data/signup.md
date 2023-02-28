@@ -2,7 +2,7 @@
 title: Python Sign-in
 layout: default
 description: A sign-in screen that interacts with Python and obtains a user.
-permalink: /signup
+permalink: /signin
 ---
 
 <form id="form">
@@ -26,11 +26,8 @@ permalink: /signup
     }
     document.getElementById("form").onsubmit = (event) => {
         event.preventDefault()
-    var url = "https://tngc.nighthawkcodescrums.gq"
-    // Comment out next line for local testing
-    //url = "http://localhost:8086"
-    // Authenticate endpoint
-    const login_url = url + '/api/chess_users/';
+    var url = "http://tngc.nighthawkcodescrums.gq"
+    const login_url = url + '/api/names';
     function login_user(){
         const body = {
             name: document.getElementById("name").value,
@@ -54,7 +51,6 @@ permalink: /signup
                 document.getElementById("message").innerHTML = message;
                 localStorage.removeItem("name");
                 localStorage.removeItem("visitor");
-                return
                 console.log("Chase is cool");
                 return('login successful');
             }
@@ -64,7 +60,7 @@ permalink: /signup
                 document.getElementById("message").innerHTML = message;
                 localStorage.setItem("name", data.name);
                 localStorage.setItem("visitor", data.name);
-                console.log("Chase is Gaya");
+                console.log("Chase. ");
             })
         })}
     }
