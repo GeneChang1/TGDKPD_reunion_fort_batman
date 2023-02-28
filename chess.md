@@ -158,6 +158,18 @@ html, body{
                 }
             }   
         if (!kingAlive){
+                deleteOptions = {
+                    mode : 'cors',
+                    method: 'DELETE',
+                    body : gid
+                }
+                fetch(url + "/removeGame", deleteOptions)
+                .then(response => {
+                    if (response.status !== 200){
+                        console.log(errorMsg);
+                    return;
+                    }
+                })
             if (localColor == "b"){
                 endGame("w")
             }
@@ -577,20 +589,6 @@ html, body{
             document.getElementById('endgame').appendChild(startGame)
             clearInterval(chessInterval)
             pushWinner(color)
-            // setInterval(function (){
-            //     deleteOptions = {
-            //         mode : 'cors',
-            //         method: 'DELETE',
-            //         body : gid
-            //     }
-            //     fetch(url + "/removeGame", deleteOptions)
-            //     .then(response => {
-            //         if (response.status !== 200){
-            //             console.log(errorMsg);
-            //         return;
-            //         }
-            //     })
-            // }, 10000)
             }   
 </script>
 <script>
