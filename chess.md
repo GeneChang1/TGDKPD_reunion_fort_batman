@@ -135,7 +135,7 @@ html, body{
             data.forEach((c) => {
                 if (c[[gid]] != undefined){
                     var newMoves = [c[[gid]]["move1"], c[[gid]]["move2"]]
-                    if (lastMove[0] != newMoves[0] && lastMove[1] != newMoves[1]){
+                    if (lastMove[0] != newMoves[0] || lastMove[1] != newMoves[1]){
                         lastMove = newMoves
                         chessBoard[newMoves[0]][1].move(newMoves[1], newMoves[0])
                         putBoard()
