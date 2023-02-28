@@ -21,7 +21,7 @@ permalink: /signin
 <script>
     document.getElementById("form").addEventListener("submit", (event) => {
         event.preventDefault();
-        const url = "http://172.24.189.191:8087/api/chess_users'";
+        const url = "https://172.24.189.191:8087/api/chess_users'";
         const login_url = url + '/api/names/';
         const body = {
             name: document.getElementById("name").value,
