@@ -1,20 +1,19 @@
 
 // const url = 'http://172.17.66.185:8087/api/chess_users/'
-const url = 'http://172.24.189.191:8087/api/chess_users'
+const url = 'http://172.20.159.234:8087/api/chess_users'
 // const url = 'http://localhost:8069/api/chess_users/'
 // const url = 'https://tngc.nighthawkcodescrums.gq/api/chess_users/'
+const username = localStorage.getItem("name")
 
 function getData(){
-    console.log("run")
-    fetch(url + `/get_games/101`, {
+    fetch(url + `/get_games/${username}`, {
         method: 'GET',
         headers:{
             'Content-Type': 'application/json',
         }
     })
     .then(response => response.json().then(data => {
-        console.log("run2")
-        console.log(data)
+        console.log("ran" + data)
         createTable(data)
     })
     )
@@ -24,7 +23,21 @@ function getData(){
 
 getData()
 
+function clearTable(){
+    document.getElementById("matches").innerHTML = 
+    `
+    <tr>
+    <th>Player 1</th>
+    <th>Player 2</th>
+    <th>Winner</th>
+    <th>Played On</th>
+    <th class="clickable">Delete</th>
+    </tr>
+    `
+}
+
 function createTable(input){
+    clearTable()
     input.shift()
     input.forEach(element => {
     var data = JSON.parse(element.replaceAll(`'`, `"`))
@@ -43,8 +56,8 @@ function createTable(input){
         td.innerHTML = i
 
         if (i == "Delete"){
-            td.data = dateRaw
-            td.onclick = deleteEntry(td.data)
+            td.dataset.date = dateRaw
+            td.onclick= deleteEntry
             td.classList = "clickable"
         }
 
@@ -55,8 +68,9 @@ function createTable(input){
 });
 }
 
-function deleteEntry(date){
-    var dataa = {uid: "101", date: date}
+function deleteEntry(event){
+    date = event.currentTarget.dataset.date
+    var dataa = {name: username, date: parseInt(date)}
     dataa = JSON.stringify(dataa)
     console.log(dataa + "YIPEE")
     fetch(url + `/delete_game`, {
@@ -67,6 +81,7 @@ function deleteEntry(date){
         body: dataa
     })
     .then(response => response.json().then(data => {
+        console.log(data)
         getData()
     })
     )
