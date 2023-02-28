@@ -128,7 +128,7 @@ html, body{
         for (let i = 1; i < 9; i++){
                 for (j in lettersOnBoard){
                     var thisId = lettersOnBoard[j] + i;
-                    if (chessBoard[thisId][0] = "K" + localColor){
+                    if (chessBoard[thisId][0] == localColor + "K"){
                         kingAlive = true
                     }
                 }
@@ -240,20 +240,9 @@ html, body{
                 console.log(errorMsg);
             return;
             }
-        response.josn().then(data => {
-            if (data){
-                startGame()
-            }
-            else{
-                invalidGame()
-            }
-        })
-        })
         startGame()
+        })
         return;
-    }
-    function invalidGame(){
-        return
     }
     function createNewGame(){
         gidOptions = {
@@ -359,36 +348,36 @@ html, body{
         }
         currentM = [];
         // assigns chess piece codes to their emoji 
-        chessPieces = {
-            wP: "../TGDKPD_reunion_fort_batman/images/white_pawn.png",
-            wR: "../TGDKPD_reunion_fort_batman/images/white_rook.png",
-            wN: "../TGDKPD_reunion_fort_batman/images/white_knight.png",
-            wB: "../TGDKPD_reunion_fort_batman/images/white_bishop.png",
-            wQ: "../TGDKPD_reunion_fort_batman/images/white_queen.png",
-            wK: "../TGDKPD_reunion_fort_batman/images/white_king.png",
-            OO: "",
-            bP: "../TGDKPD_reunion_fort_batman/images/black_pawn.png",
-            bR: "../TGDKPD_reunion_fort_batman/images/black_rook.png",
-            bN: "../TGDKPD_reunion_fort_batman/images/black_knight.png",
-            bB: "../TGDKPD_reunion_fort_batman/images/black_bishop.png",
-            bQ: "../TGDKPD_reunion_fort_batman/images/black_queen.png",
-            bK: "../TGDKPD_reunion_fort_batman/images/black_king.png",
-        }
-        //   chessPieces = {
-        //     wP: "../images/white_pawn.png",
-        //     wR: "../images/white_rook.png",
-        //     wN: "../images/white_knight.png",
-        //     wB: "../images/white_bishop.png",
-        //     wQ: "../images/white_queen.png",
-        //     wK: "../images/white_king.png",
+        // chessPieces = {
+        //     wP: "../TGDKPD_reunion_fort_batman/images/white_pawn.png",
+        //     wR: "../TGDKPD_reunion_fort_batman/images/white_rook.png",
+        //     wN: "../TGDKPD_reunion_fort_batman/images/white_knight.png",
+        //     wB: "../TGDKPD_reunion_fort_batman/images/white_bishop.png",
+        //     wQ: "../TGDKPD_reunion_fort_batman/images/white_queen.png",
+        //     wK: "../TGDKPD_reunion_fort_batman/images/white_king.png",
         //     OO: "",
-        //     bP: "../images/black_pawn.png",
-        //     bR: "../images/black_rook.png",
-        //     bN: "../images/black_knight.png",
-        //     bB: "../images/black_bishop.png",
-        //     bQ: "../images/black_queen.png",
-        //     bK: "../images/black_king.png",
+        //     bP: "../TGDKPD_reunion_fort_batman/images/black_pawn.png",
+        //     bR: "../TGDKPD_reunion_fort_batman/images/black_rook.png",
+        //     bN: "../TGDKPD_reunion_fort_batman/images/black_knight.png",
+        //     bB: "../TGDKPD_reunion_fort_batman/images/black_bishop.png",
+        //     bQ: "../TGDKPD_reunion_fort_batman/images/black_queen.png",
+        //     bK: "../TGDKPD_reunion_fort_batman/images/black_king.png",
         // }
+          chessPieces = {
+            wP: "../images/white_pawn.png",
+            wR: "../images/white_rook.png",
+            wN: "../images/white_knight.png",
+            wB: "../images/white_bishop.png",
+            wQ: "../images/white_queen.png",
+            wK: "../images/white_king.png",
+            OO: "",
+            bP: "../images/black_pawn.png",
+            bR: "../images/black_rook.png",
+            bN: "../images/black_knight.png",
+            bB: "../images/black_bishop.png",
+            bQ: "../images/black_queen.png",
+            bK: "../images/black_king.png",
+        }
         endGameBool = false;
         //move counter
         turn = 0;
@@ -474,12 +463,11 @@ html, body{
             }
         }
         putBoard()
-        chessInterval = setInterval(() => {   try {checkMove()} catch {console.log('heheheha')}}, 5000)
+        chessInterval = setInterval(() => {   try {checkMove()} catch {console.log('heheheha')}}, 2000)
         }
         // startGame()
         function move(div){
             var id = div.id
-            console.log(div.children[0].src)
             if (!moving && div.children[0].src.slice(-1) =="g" && turnMoveCheck(chessBoard[id][0][0])){
                 moving = true
                 if (div.children[0].src.slice(-1) == "g"){
