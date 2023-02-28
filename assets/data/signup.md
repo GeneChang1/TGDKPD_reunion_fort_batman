@@ -21,7 +21,7 @@ permalink: /signin
 <script>
     document.getElementById("form").addEventListener("submit", (event) => {
         event.preventDefault();
-        const url = "http://172.19.164.171:8087/api/names/";
+        const url = "https://172.19.164.171:8087/api/names/";
         const body = {
             name: document.getElementById("name").value,
             password: document.getElementById("password").value,
