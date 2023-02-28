@@ -557,12 +557,11 @@ html, body{
             var container = document.createElement('div');
             var endgame = document.createElement('div');
             var winlose = document.createElement('p');
-            var joinGame = document.createElement('button');
             var startGame = document.createElement('button');
             container.classList.add('container');
             container.id = "container";
             winlose.classList.add('winLose');
-            if (color = localColor){
+            if (color == localColor){
                 winlose.innerHTML = "You Win!"
             }
             else {
@@ -570,23 +569,18 @@ html, body{
             }
             endgame.classList.add('endgame');
             endgame.id = "endgame";
-            joinGame.classList.add('button');
-            joinGame.id = "joinGame"
-            joinGame.innerHTML = "Join Game";
-            joinGame.onclick = function(){
-                joinGamePage(); 
-                gameMoves = []}
             startGame.classList.add('button');
-            startGame.innerHTML = "Start Game";
+            startGame.innerHTML = "Play Again?";
             startGame.id = "startGame"
             startGame.onclick = function(){
-                createNewGame(); 
                 document.getElementById("container").remove();
+                openPage();
                 gameMoves = []}
             document.getElementById('body').appendChild(container)
             document.getElementById('container').appendChild(endgame)
-            document.getElementById('endgame').appendChild(joinGame)
+            document.getElementById('endgame').appendChild(winlose)
             document.getElementById('endgame').appendChild(startGame)
+            document.getElementById('gidDisplay').remove();
             clearInterval(chessInterval)
             pushWinner(color)
             }   
