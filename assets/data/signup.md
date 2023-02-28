@@ -21,7 +21,7 @@ permalink: /signin
 <script>
     document.getElementById("form").addEventListener("submit", (event) => {
         event.preventDefault();
-        const url = "http://tngc.nighthawkcodescrums.gq";
+        const url = "https://tngc.nighthawkcodescrums.gq";
         const login_url = url + '/api/names/';
         const body = {
             name: document.getElementById("name").value,
