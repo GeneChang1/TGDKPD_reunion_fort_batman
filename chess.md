@@ -372,36 +372,36 @@ html, body{
         }
         currentM = [];
         // assigns chess piece codes to their emoji 
-        // chessPieces = {
-        //     wP: "../TGDKPD_reunion_fort_batman/images/white_pawn.png",
-        //     wR: "../TGDKPD_reunion_fort_batman/images/white_rook.png",
-        //     wN: "../TGDKPD_reunion_fort_batman/images/white_knight.png",
-        //     wB: "../TGDKPD_reunion_fort_batman/images/white_bishop.png",
-        //     wQ: "../TGDKPD_reunion_fort_batman/images/white_queen.png",
-        //     wK: "../TGDKPD_reunion_fort_batman/images/white_king.png",
-        //     OO: "",
-        //     bP: "../TGDKPD_reunion_fort_batman/images/black_pawn.png",
-        //     bR: "../TGDKPD_reunion_fort_batman/images/black_rook.png",
-        //     bN: "../TGDKPD_reunion_fort_batman/images/black_knight.png",
-        //     bB: "../TGDKPD_reunion_fort_batman/images/black_bishop.png",
-        //     bQ: "../TGDKPD_reunion_fort_batman/images/black_queen.png",
-        //     bK: "../TGDKPD_reunion_fort_batman/images/black_king.png",
-        // }
-          chessPieces = {
-            wP: "../images/white_pawn.png",
-            wR: "../images/white_rook.png",
-            wN: "../images/white_knight.png",
-            wB: "../images/white_bishop.png",
-            wQ: "../images/white_queen.png",
-            wK: "../images/white_king.png",
+        chessPieces = {
+            wP: "../TGDKPD_reunion_fort_batman/images/white_pawn.png",
+            wR: "../TGDKPD_reunion_fort_batman/images/white_rook.png",
+            wN: "../TGDKPD_reunion_fort_batman/images/white_knight.png",
+            wB: "../TGDKPD_reunion_fort_batman/images/white_bishop.png",
+            wQ: "../TGDKPD_reunion_fort_batman/images/white_queen.png",
+            wK: "../TGDKPD_reunion_fort_batman/images/white_king.png",
             OO: "",
-            bP: "../images/black_pawn.png",
-            bR: "../images/black_rook.png",
-            bN: "../images/black_knight.png",
-            bB: "../images/black_bishop.png",
-            bQ: "../images/black_queen.png",
-            bK: "../images/black_king.png",
+            bP: "../TGDKPD_reunion_fort_batman/images/black_pawn.png",
+            bR: "../TGDKPD_reunion_fort_batman/images/black_rook.png",
+            bN: "../TGDKPD_reunion_fort_batman/images/black_knight.png",
+            bB: "../TGDKPD_reunion_fort_batman/images/black_bishop.png",
+            bQ: "../TGDKPD_reunion_fort_batman/images/black_queen.png",
+            bK: "../TGDKPD_reunion_fort_batman/images/black_king.png",
         }
+        //   chessPieces = {
+        //     wP: "../images/white_pawn.png",
+        //     wR: "../images/white_rook.png",
+        //     wN: "../images/white_knight.png",
+        //     wB: "../images/white_bishop.png",
+        //     wQ: "../images/white_queen.png",
+        //     wK: "../images/white_king.png",
+        //     OO: "",
+        //     bP: "../images/black_pawn.png",
+        //     bR: "../images/black_rook.png",
+        //     bN: "../images/black_knight.png",
+        //     bB: "../images/black_bishop.png",
+        //     bQ: "../images/black_queen.png",
+        //     bK: "../images/black_king.png",
+        // }
         endGameBool = false;
         //move counter
         turn = 0;
