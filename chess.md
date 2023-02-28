@@ -40,15 +40,22 @@ html, body{
     let localColor;
     var lastMove = ["move1", "move2"]
     var chessInterval
-    const url = "https://tngc.nighthawkcodescrums.gq/api/server"
+    // const url = "https://tngc.nighthawkcodescrums.gq/api/server"
     // const url = "http://localhost:8069/api/server"
-    // const url = "http://10.0.0.63:8087/api/server"
+    const url = "http://10.8.141.104:8087/api/server"
     const winnerUrl = 'http://172.19.164.171:8087/api/chess_users'
     //useful functions
     openPage()
     function openPage(){
+        // if (typeof localuid == "undefined"){
+        //     var bad = document.createElement('p')
+        //     bad.innerHTML = "Please Login before playing. If you are already logged in please double check that you are actually logged in or try logging in again. Reload the page when you have logged in."
+        //     document.getElementById('body').appendChild(bad)
+        //     return
+        // }
         var container = document.createElement('div');
         var endgame = document.createElement('div');
+        var uid = document.createElement('input');
         var joinGame = document.createElement('button');
         var startGame = document.createElement('button');
         container.classList.add('container');
@@ -59,17 +66,22 @@ html, body{
         joinGame.id = "joinGame"
         joinGame.innerHTML = "Join Game";
         joinGame.onclick = function(){
-            joinGamePage(); 
+            if(uidCheck()){joinGamePage()}; 
             gameMoves = []}
         startGame.classList.add('button');
         startGame.innerHTML = "Start Game";
         startGame.id = "startGame"
         startGame.onclick = function(){
-            createNewGame(); 
+            if(uidCheck()){createNewGame()}
             document.getElementById("container").remove();
             gameMoves = []}
+        uid.classList.add('button')
+        uid.id = "uid"
+        uid.type = "text"
+        uid.placeholder = "Username"
         document.getElementById('body').appendChild(container)
         document.getElementById('container').appendChild(endgame)
+        document.getElementById('endgame').appendChild(uid)
         document.getElementById('endgame').appendChild(joinGame)
         document.getElementById('endgame').appendChild(startGame)
     }
@@ -92,9 +104,21 @@ html, body{
         document.getElementById('endgame').appendChild(gid)
         document.getElementById('endgame').appendChild(joinGame)
     }
+    function uidCheck(){
+        if(document.getElementById("uid").value == ""){
+            var bad = document.createElement('p')
+            bad.innerHTML = "Please reload and enter a username"
+            document.getElementById("container").remove()
+            document.getElementById('body').appendChild(bad)
+            return false;
+        }
+        else {
+            localuid = document.getElementById("uid").value
+            return true
+        }
+    }
     function globalIDs(gidTemp){
         gid = gidTemp
-        // localuid = document.getElementById("uid").value
     }
     function checkMove(){
         let moveCheckOptions = {
@@ -109,7 +133,7 @@ html, body{
             }
             response.json().then(data => {
             data.forEach((c) => {
-                if (c[[gid]] != undefined){j
+                if (c[[gid]] != undefined){
                     var newMoves = [c[[gid]]["move1"], c[[gid]]["move2"]]
                     if (lastMove[0] != newMoves[0] && lastMove[1] != newMoves[1]){
                         lastMove = newMoves
