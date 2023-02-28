@@ -30,9 +30,6 @@ html, body{
 
 <body id="body">
 </body>
-<input type='text' id="uid" placeholder="username">
-<input type='text' id="gid" placeholder="gid">
-<button type="button" onclick="joinGame()">Join or Start Game</button>
 <script src="assets/js/chessLogic.js">
 </script>
 <script>
@@ -45,12 +42,59 @@ html, body{
     var chessInterval
     // const url = "https://tngc.nighthawkcodescrums.gq/api/server"
     // const url = "http://localhost:8069/api/server"
-    const url = "http://127.0.0.1:5000/api/server"
+    const url = "http://10.0.0.63:8087/api/server"
     const winnerUrl = 'http://172.19.164.171:8087/api/chess_users'
     //useful functions
-    function globalIDs(){
-        gid = document.getElementById("gid").value
-        localuid = document.getElementById("uid").value
+    openPage()
+    function openPage(){
+        var container = document.createElement('div');
+        var endgame = document.createElement('div');
+        var joinGame = document.createElement('button');
+        var startGame = document.createElement('button');
+        container.classList.add('container');
+        container.id = "container";
+        endgame.classList.add('endgame');
+        endgame.id = "endgame";
+        joinGame.classList.add('button');
+        joinGame.id = "joinGame"
+        joinGame.innerHTML = "Join Game";
+        joinGame.onclick = function(){
+            joinGamePage(); 
+            gameMoves = []}
+        startGame.classList.add('button');
+        startGame.innerHTML = "Start Game";
+        startGame.id = "startGame"
+        startGame.onclick = function(){
+            createNewGame(); 
+            document.getElementById("container").remove();
+            gameMoves = []}
+        document.getElementById('body').appendChild(container)
+        document.getElementById('container').appendChild(endgame)
+        document.getElementById('endgame').appendChild(joinGame)
+        document.getElementById('endgame').appendChild(startGame)
+    }
+    function joinGamePage(){
+        document.getElementById("startGame").remove();
+        document.getElementById("joinGame").remove();
+        var gid = document.createElement('input')
+        var joinGame = document.createElement('button');
+        gid.id = "gid"
+        gid.type = "text"
+        gid.classList.add('button')
+        gid.placeholder = "Game Name"
+        joinGame.classList.add('button');
+            joinGame.id = "joinGame"
+            joinGame.innerHTML = "Join Game";
+            joinGame.onclick = function(){
+                addSecondPlayer(); 
+                document.getElementById("container").remove();
+                gameMoves = []}
+        document.getElementById('endgame').appendChild(gid)
+        document.getElementById('endgame').appendChild(joinGame)
+    }
+    function globalIDs(gidTemp){
+        gid = gidTemp
+        // localuid = document.getElementById("uid").value
     }
     function checkMove(){
         let moveCheckOptions = {
@@ -65,25 +109,39 @@ html, body{
             }
             response.json().then(data => {
             data.forEach((c) => {
-                if (c[[gid]] != undefined){
+                console.log("fetchd")
+                if (c[[gid]] != undefined){j
                     var newMoves = [c[[gid]]["move1"], c[[gid]]["move2"]]
-                    if (lastMove != newMoves){
+                    if (lastMove[0] != newMoves[0] && lastMove[1] != newMoves[1]){
+                        lastMove = newMoves
                         chessBoard[newMoves[0]][1].move(newMoves[1], newMoves[0])
                         putBoard()
                         turn++
-                        if (chessBoard[newMoves[1][0][1] == "k"]){
-                            if (localColor == "b"){
-                                endGame("w")
-                            }
-                            else if (localColor =="w"){
-                                endGame("b")
-                            }
-                        }
+                        kingCheck()
                     }
                 }
             })
         })
         })
+    }
+    function kingCheck(){
+        kingAlive = false
+        for (let i = 1; i < 9; i++){
+                for (j in lettersOnBoard){
+                    var thisId = lettersOnBoard[j] + i;
+                    if (chessBoard[thisId][0] = "K" + localColor){
+                        kingAlive = true
+                    }
+                }
+            }   
+        if (!kingAlive){
+            if (localColor == "b"){
+                endGame("w")
+            }
+            else if (localColor =="w"){
+                endGame("b")
+            }
+        }
     }
     function pushMove(currentM, newM){
         let movePushOptions = {
@@ -169,7 +227,8 @@ html, body{
         })
     })
     }
-    function addSecondPlayer(gid){
+    function addSecondPlayer(){
+        gid = document.getElementById("gid").value
         localColor = "b"
         secondPlayerOptions ={
             mode : 'cors',
@@ -209,25 +268,24 @@ html, body{
             return;
             }
         response.json().then(data => {
-            gid = data
-        })
-        })
-        localColor = "w"
-        createGameOptions = {
-            mode : 'cors',
-            method: 'POST',
-            body : JSON.stringify({[gid] : {'uid1' : localuid, 'uid2' : 1234, 'move1' : 'move1', 'move2' : 'move2'}})
-        }
-        fetch(url + "/start", createGameOptions)
-        .then(response => {
-            if (response.status !== 200) {
-                console.log(errorMsg);
-            return;
+            globalIDs(data)
+            localColor = "w"
+            createGameOptions = {
+                mode : 'cors',
+                method: 'POST',
+                body : JSON.stringify({[gid] : {'uid1' : localuid, 'uid2' : 1234, 'move1' : 'move1', 'move2' : 'move2'}})
             }
+            fetch(url + "/start", createGameOptions)
+            .then(response => {
+                if (response.status !== 200) {
+                    console.log(errorMsg);
+                return;
+                }
+            })
+            startGame()
         })
-        startGame()
+        })
     }
-    // startGame()
     function getKeyByValue(object, value, type) {
         if (type == 1){
             return Object.keys(object).find(key => object[key] === value);
@@ -244,6 +302,7 @@ html, body{
     }
     function movePiece(currentM, newM){
             chessBoard[currentM][1].move(newM, currentM)
+            lastMove = [currentM, newM]
             pushMove(currentM, newM)
     }
     function putOnBoard(id) {
@@ -261,11 +320,14 @@ html, body{
             }
     }
     function startGame(){
-        // apiStartGame()
+        var gidDisplay = document.createElement('p')
+        gidDisplay.id = "gidDisplay"
+        gidDisplay.innerHTML = "Game ID: \"" + gid + "\""
         var chessBoardDiv = document.createElement('div')
         chessBoardDiv.id = "chessBoard"
         chessBoardDiv.classList.add('chessboard')
         document.getElementById("body").appendChild(chessBoardDiv)
+        document.getElementById("body").appendChild(gidDisplay)
         if (localColor == "w"){
             for (let i = 1; i < 9; i++){
                 for (j in lettersOnBoard){
@@ -455,38 +517,54 @@ html, body{
             document.getElementById("chessBoard").remove();
             var container = document.createElement('div');
             var endgame = document.createElement('div');
-            var newGame = document.createElement('button');
+            var winlose = document.createElement('p');
+            var joinGame = document.createElement('button');
+            var startGame = document.createElement('button');
             container.classList.add('container');
             container.id = "container";
+            winlose.classList.add('winLose');
+            if (color = localColor){
+                winlose.innerHTML = "You Win!"
+            }
+            else {
+                winlose.innerHTML = "You Lose!"
+            }
             endgame.classList.add('endgame');
             endgame.id = "endgame";
-            newGame.classList.add('button');
-            newGame.innerHTML = "New Game";
-            newGame.onclick = function(){
-                startGame(); 
+            joinGame.classList.add('button');
+            joinGame.id = "joinGame"
+            joinGame.innerHTML = "Join Game";
+            joinGame.onclick = function(){
+                joinGamePage(); 
+                gameMoves = []}
+            startGame.classList.add('button');
+            startGame.innerHTML = "Start Game";
+            startGame.id = "startGame"
+            startGame.onclick = function(){
+                createNewGame(); 
                 document.getElementById("container").remove();
                 gameMoves = []}
             document.getElementById('body').appendChild(container)
             document.getElementById('container').appendChild(endgame)
-            document.getElementById('endgame').appendChild(newGame)
+            document.getElementById('endgame').appendChild(joinGame)
+            document.getElementById('endgame').appendChild(startGame)
             clearInterval(chessInterval)
             pushWinner(color)
-        }
-        // const url = "https://tngc.nighthawkcodescrums.gq/api/server1/put"
-        // let options = {
-        //     mode = 'CORS'
-        //     body = JSON.stringify(moves);
-        //     method = 'POST'
-        //     }
-        // fetch(url + "/update_game", options)
-        // .then(response => {
-        // if (response.status !== 200) {
-        //   console.log(errorMsg);
-        //   return;
-        // }
-        // response.json().then(data => {
-        //     console.log(data);
-        // })
+            // setInterval(function (){
+            //     deleteOptions = {
+            //         mode : 'cors',
+            //         method: 'DELETE',
+            //         body : gid
+            //     }
+            //     fetch(url + "/removeGame", deleteOptions)
+            //     .then(response => {
+            //         if (response.status !== 200){
+            //             console.log(errorMsg);
+            //         return;
+            //         }
+            //     })
+            // }, 10000)
+            }   
 </script>
 <script>
 </script>

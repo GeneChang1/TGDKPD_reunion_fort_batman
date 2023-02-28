@@ -1,3 +1,4 @@
+
 .container{
     margin-top: 5%;
     display: flex;
@@ -9,15 +10,15 @@
     justify-content: center;
     display:flex;
     flex-direction: column;
-    border:1px solid rgb(255, 255, 255);
+    border:1px solid white;
     border-radius: 10px;
     padding: 10px;
     height: 500px;
     width: 500px;
 }
 .button{
-    margin-top: 30%;
-    margin-bottom:20%;
+    margin-top: 0%;
+    margin-bottom:10%;
     height: 75px;
     width: 150px;
     background-color: black;
@@ -32,7 +33,7 @@
     border:1px solid grey;
 }
 .winLose{
-    margin-top: 10%;
+    margin-top: 5%;
     font-size: 65;
 }
 .chessboard {
