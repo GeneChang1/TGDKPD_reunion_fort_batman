@@ -109,7 +109,6 @@ html, body{
             }
             response.json().then(data => {
             data.forEach((c) => {
-                console.log("fetchd")
                 if (c[[gid]] != undefined){j
                     var newMoves = [c[[gid]]["move1"], c[[gid]]["move2"]]
                     if (lastMove[0] != newMoves[0] && lastMove[1] != newMoves[1]){
@@ -327,7 +326,7 @@ html, body{
         chessBoardDiv.id = "chessBoard"
         chessBoardDiv.classList.add('chessboard')
         document.getElementById("body").appendChild(chessBoardDiv)
-        document.getElementById("body").appendChild(gidDisplay)
+        // document.getElementById("body").appendChild(gidDisplay)
         if (localColor == "w"){
             for (let i = 1; i < 9; i++){
                 for (j in lettersOnBoard){
@@ -375,6 +374,21 @@ html, body{
             bQ: "../TGDKPD_reunion_fort_batman/images/black_queen.png",
             bK: "../TGDKPD_reunion_fort_batman/images/black_king.png",
         }
+        //   chessPieces = {
+        //     wP: "../images/white_pawn.png",
+        //     wR: "../images/white_rook.png",
+        //     wN: "../images/white_knight.png",
+        //     wB: "../images/white_bishop.png",
+        //     wQ: "../images/white_queen.png",
+        //     wK: "../images/white_king.png",
+        //     OO: "",
+        //     bP: "../images/black_pawn.png",
+        //     bR: "../images/black_rook.png",
+        //     bN: "../images/black_knight.png",
+        //     bB: "../images/black_bishop.png",
+        //     bQ: "../images/black_queen.png",
+        //     bK: "../images/black_king.png",
+        // }
         endGameBool = false;
         //move counter
         turn = 0;
@@ -460,14 +474,15 @@ html, body{
             }
         }
         putBoard()
-        chessInterval = setInterval(() => {   try {checkMove()} catch {console.log('heheheha')}}, 1000)
+        chessInterval = setInterval(() => {   try {checkMove()} catch {console.log('heheheha')}}, 5000)
         }
         // startGame()
         function move(div){
             var id = div.id
-            if (!moving && div.children[0].src[8] == "u" && turnMoveCheck(chessBoard[id][0][0])){
+            console.log(div.children[0].src)
+            if (!moving && div.children[0].src.slice(-1) =="g" && turnMoveCheck(chessBoard[id][0][0])){
                 moving = true
-                if (div.children[0].src[8] == "u"){
+                if (div.children[0].src.slice(-1) == "g"){
                     currentM.push(id);
                     var moves = chessBoard[id][1].getAvailableMoves();
                     moves.forEach((c) => {
@@ -491,7 +506,7 @@ html, body{
                 putBoard();
                 currentM = [];
                 moving = false;
-                if (div.children[0].src[8] == "u" && turnMoveCheck(chessBoard[id][0][0])){
+                if (div.children[0].src.slice(-1) == "g" && turnMoveCheck(chessBoard[id][0][0])){
                     move(id);
                 }
             }
