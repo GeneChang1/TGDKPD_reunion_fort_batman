@@ -95,7 +95,7 @@
             <th>Player 2</th>
             <th>Winner</th>
             <th>Played On</th>
-            <th class="clickable" id="deleteAll" onclick="deleteEntry()">Delete</th>
+            <th class="clickable">Delete</th>
         </tr>
     </table>
 </div>
