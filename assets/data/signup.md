@@ -14,54 +14,47 @@ permalink: /signin
         Password:
         <input type="password" name="password" id="password" required="" />
     </label></p>
-    <button>Login</button>
+    <button type="submit">Login</button>
     <p id="message"></p>
 </form>
 
 <script>
-    // URL for deployment
-    document.getElementById("form").onsubmit = (event) => {
-        event.preventDefault()
-        console.log("Chase is Gay")
-    }
-    document.getElementById("form").onsubmit = (event) => {
-        event.preventDefault()
-    var url = "http://tngc.nighthawkcodescrums.gq"
-    const login_url = url + '/api/names';
-    function login_user(){
+    document.getElementById("form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const url = "http://tngc.nighthawkcodescrums.gq";
+        const login_url = url + '/api/names/';
         const body = {
             name: document.getElementById("name").value,
             password: document.getElementById("password").value,
         };
         const requestOptions = {
-            method: 'GET',
-            mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            // credentials: 'include', // include, *same-origin, omit
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
             body: JSON.stringify(body),
             headers: {
                 "Content-Type": "application/json",
             },
         };
-        fetch(login_url, requestOptions);
-        .then(response => {
-            // trap error response from Web API
-            if (response.status !== 200) {
-                const message = 'Login error: ' + response.status + " " + response.statusText;
-                document.getElementById("message").innerHTML = message;
-                localStorage.removeItem("name");
-                localStorage.removeItem("visitor");
-                console.log("Chase is cool");
-                return('login successful');
-            }
-            // Valid response will contain json data
-            response.json().then(data => {
+        fetch(login_url, requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Login error: ' + response.status + " " + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
                 const message = 'Login success: ' + data.name;
                 document.getElementById("message").innerHTML = message;
                 localStorage.setItem("name", data.name);
                 localStorage.setItem("visitor", data.name);
-                console.log("Chase. ");
             })
-        })}
-    }
+            .catch(error => {
+                const message = error.message;
+                document.getElementById("message").innerHTML = message;
+                localStorage.removeItem("name");
+                localStorage.removeItem("visitor");
+            });
+    });
 </script>
