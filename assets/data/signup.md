@@ -5,7 +5,7 @@ description: A sign-in screen that interacts with Python and obtains a user.
 permalink: /signup
 ---
 
-<form id="form" action="javascript:login_user()">
+<form id="form">
     <p><label>
         User ID:
         <input type="text" name="name" id="name" required="" />
@@ -43,7 +43,7 @@ permalink: /signup
             // credentials: 'include', // include, *same-origin, omit
             body: JSON.stringify(body),
             headers: {
-                "content-type": "application/json",
+                "Content-Type": "application/json",
             },
         };
         fetch(login_url, requestOptions);

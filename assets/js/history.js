@@ -44,7 +44,18 @@ function createTable(input){
 }
 
 function deleteEntry(){
-
+    fetch(url + `/get_games/`, {
+        method: 'GET',
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => response.json().then(data => {
+        createTable(data)
+    })
+    )
+    .then(response => console.log(response))
+    .catch(err => console.error(err))
 }
 /* <th>Player 1</th>
 <th>Player 2</th>
