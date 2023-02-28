@@ -75,7 +75,7 @@
 	<script>
 		const gamearea1 = document.querySelector(".gamearea");
 		const score1 = createEle(gamearea1, "div", "Score :", "score");
-		const btn1 = createEle(gamearea1, "button", "Spin", "btn");
+		const bt1 = createEle(gamearea1, "button", "Spin", "btn");
 		const message1 = createEle(gamearea1, "div", "Press Spin", "message");
 		const output1 = createEle(gamearea1, "div", "", "output");
 		const game1 = {
@@ -109,7 +109,7 @@
 		const loadScore = async () => {
 			const user = document.getElementById("user").value;
 			const record = await fetch(
-				api + "/roulette?" + new URLSearchParams({ user })
+				api + "/roulette" + new URLSearchParams({ user })
 			).then((r) => r.json());
 			console.log(record);
 			game.coins = record.score;
