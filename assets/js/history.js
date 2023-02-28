@@ -4,6 +4,7 @@
 // const url = 'http://localhost:8069/api/chess_users/'
 const url = 'https://tngc.nighthawkcodescrums.gq/api/chess_users/'
 const username = localStorage.getItem("name")
+var hehehaha = "hehehaha"
 
 function getData(){
     fetch(url + `/get_games/${username}`, {
