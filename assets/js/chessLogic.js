@@ -511,7 +511,7 @@ class knight extends piece{
     getFreeMoves(){
         let totalMoves = this.getTotalMoves();
         let obstructedMoves = this.getObstructedMoves();
-        freeMoves = totalMoves.filter( (c) => !obstructedMoves.includes(c) );
+        let freeMoves = totalMoves.filter( (c) => !obstructedMoves.includes(c) );
         return freeMoves;
     }
     getAvailableCaptures(){
