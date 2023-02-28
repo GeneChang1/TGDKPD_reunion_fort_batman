@@ -234,7 +234,6 @@
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
-					"Access-Control-Allow-Origin": "https://tngc.nighthawkcodescrums.gq/api"
 				},
 				body: JSON.stringify({ user, score: game.coins }),
 			});
@@ -250,7 +249,6 @@
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"Access-Control-Allow-Origin": "https://tngc.nighthawkcodescrums.gq/api"
 				},
 				body: JSON.stringify({ user, score: game.coins }),
 			});
