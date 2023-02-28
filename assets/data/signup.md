@@ -21,8 +21,7 @@ permalink: /signin
 <script>
     document.getElementById("form").addEventListener("submit", (event) => {
         event.preventDefault();
-        const url = "https://172.24.189.191:8087/api/chess_users";
-        const login_url = url + '/api/names/';
+        const url = "https://172.24.189.191:8087/api/names";
         const body = {
             name: document.getElementById("name").value,
             password: document.getElementById("password").value,
@@ -37,7 +36,7 @@ permalink: /signin
                 "Content-Type": "application/json",
             },
         };
-        fetch(login_url, requestOptions)
+        fetch(url, requestOptions)
             .then(response => {
                 if (response.ok) {
                     return response.json();
