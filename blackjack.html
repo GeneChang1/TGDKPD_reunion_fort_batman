@@ -123,12 +123,12 @@ p.introduction span {
                 }
 
                 // Generates a random card and returns it as a string
-                function RandCard(isP){
+                function RandCard(isPlayer){
                     let randNumber = Math.trunc(Math.random() * 13);
                     let randCardType = Math.trunc(Math.random() * 4);
                     
                     // Checks if you are making a card for the dealer or the player
-                    if(isP == true){
+                    if(isPlayer == true){
                         // If the random card is an ace it will add 11 to the score and the option to have only 1 instead
                         if(randNumber == 0){
                             playerCards.push(11);
@@ -153,23 +153,18 @@ p.introduction span {
                            dealerCards.push(randNumber + 1);
                         }
                     }
-                    revealCard(randNumber + randCardType*13, isP)
-                    return Cards[randNumber];
+                    
+                    revealCard(randNumber + randCardType*13, isPlayer)
+                    return Cards[randNumber]
+
                 }
                 // Function called every time you want an image of the card to show
-                function revealCard(card, isP){
-                    var temp = '<img class="card" src="/TGDKPD_reunion_fort_batman/images/cards/'+ cardImages[card] + '.png" alt="card">';
-                    var temp2 = document.createElement('img')
-                    temp2.src = `/TGDKPD_reunion_fort_batman/images/cards/${cardImages[card]}.png`
-                    temp2.classList.add("card")
-                    temp2.alt = "card"
-                    if(isP){
-                        // document.getElementById("playerCardArray").innerHTML += temp;
-                        document.getElementById("playerCardArray").appendChild(temp2)
-                    }else{
-                        document.getElementById("dealerCardArray").appendChild(temp2)
-                        // document.getElementById("dealerCardArray").innerHTML += temp;
-                    }
+                function revealCard(card, isPlayer){
+                    var user = isPlayer ? "player" : "dealer"
+                    var temp = document.createElement('img')
+                    temp.src = `/TGDKPD_reunion_fort_batman/images/cards/${cardImages[card]}.png`
+                    temp.classList.add("card")
+                    document.getElementById(`${user}CardArray`).appendChild(temp)
                 }
 
                 // Returns the score of the player or dealer
@@ -202,7 +197,6 @@ p.introduction span {
 
                 // Initialization of the game and resetting of the scores
                 document.getElementById("start").onclick = function(){
-                    // revealCard(1);
                     playerCards = [];
                     dealerCards = [];
                     playerAces = [];
@@ -236,7 +230,7 @@ p.introduction span {
                 }
 
                 // Adds score to the player and checks if the player has won or lost if they are over or equal to the winscore
-                document.getElementById("hit").onclick = function(){
+                document.getElementById("hit").onclick = () => {
 
                     document.getElementById("Player").innerHTML += " | " + RandCard(true);
                     document.getElementById("PlayerScore").innerHTML = "Your Score is: " + CalculateScore(true);
