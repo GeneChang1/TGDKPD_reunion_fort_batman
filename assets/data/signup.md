@@ -21,7 +21,7 @@ permalink: /signin
 <script>
     document.getElementById("form").addEventListener("submit", (event) => {
         event.preventDefault();
-        const url = "https://172.24.189.191:8087/api/chess_users'";
+        const url = "https://172.24.189.191:8087/api/chess_users";
         const login_url = url + '/api/names/';
         const body = {
             name: document.getElementById("name").value,
@@ -39,10 +39,13 @@ permalink: /signin
         };
         fetch(login_url, requestOptions)
             .then(response => {
-                if (!response.ok) {
+                if (response.ok) {
+                    return response.json();
+                } else if (response.status === 400) {
+                    throw new Error('Invalid user id or password');
+                } else {
                     throw new Error('Login error: ' + response.status + " " + response.statusText);
                 }
-                return response.json();
             })
             .then(data => {
                 const message = 'Login success: ' + data.name;
