@@ -2,7 +2,7 @@
 // const url = 'http://172.17.66.185:8087/api/chess_users/'
 // const url = 'http://172.20.159.234:8087/api/chess_users'
 // const url = 'http://localhost:8069/api/chess_users/'
-const url = 'https://tngc.nighthawkcodescrums.gq/api/chess_users/'
+const url = 'https://tngc.nighthawkcodescrums.gq/api/chess_users'
 const username = localStorage.getItem("name")
 var hehehaha = "hehehaha"
 
@@ -75,7 +75,7 @@ function deleteEntry(event){
     dataa = JSON.stringify(dataa)
     console.log(dataa + "YIPEE")
     fetch(url + `/delete_game`, {
-        method: 'DELETE',
+        method: 'POST',
         headers:{
             'Content-Type': 'application/json',
         },
