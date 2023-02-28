@@ -43,7 +43,7 @@ html, body{
     const url = "https://tngc.nighthawkcodescrums.gq/api/server"
     // const url = "http://localhost:8069/api/server"
     // const url = "http://10.8.141.104:8087/api/server"
-    const winnerUrl = 'https://tngc.nighthawkcodescrums.gq/chess_users'
+    const winnerUrl = 'https://tngc.nighthawkcodescrums.gq/api/chess_users'
     //useful functions
     openPage()
     function openPage(){
