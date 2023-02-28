@@ -361,19 +361,19 @@ html, body{
         currentM = [];
         // assigns chess piece codes to their emoji 
         chessPieces = {
-            wP: "/images/white_pawn.png",
-            wR: "/images/white_rook.png",
-            wN: "/images/white_knight.png",
-            wB: "/images/white_bishop.png",
-            wQ: "/images/white_queen.png",
-            wK: "/images/white_king.png",
+            wP: "../images/white_pawn.png",
+            wR: "../images/white_rook.png",
+            wN: "../images/white_knight.png",
+            wB: "../images/white_bishop.png",
+            wQ: "../images/white_queen.png",
+            wK: "../images/white_king.png",
             OO: "",
-            bP: "/images/black_pawn.png",
-            bR: "/images/black_rook.png",
-            bN: "/images/black_knight.png",
-            bB: "/images/black_bishop.png",
-            bQ: "/images/black_queen.png",
-            bK: "/images/black_king.png",
+            bP: "../images/black_pawn.png",
+            bR: "../images/black_rook.png",
+            bN: "../images/black_knight.png",
+            bB: "../images/black_bishop.png",
+            bQ: "../images/black_queen.png",
+            bK: "../images/black_king.png",
         }
         endGameBool = false;
         //move counter
