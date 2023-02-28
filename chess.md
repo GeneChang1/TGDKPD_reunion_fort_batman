@@ -361,19 +361,19 @@ html, body{
         currentM = [];
         // assigns chess piece codes to their emoji 
         chessPieces = {
-            wP: "https://user-images.githubusercontent.com/111609656/217071573-b89fe06e-7fcf-40d3-a3f5-24b2df70fce3.png",
-            wR: "https://user-images.githubusercontent.com/111609656/217149242-f921fbdc-10fe-4cc8-a3dc-e11874f80342.png",
-            wN: "https://user-images.githubusercontent.com/111609656/217149238-5915e9c8-321c-4854-bc15-4bb6908a7895.png",
-            wB: "https://user-images.githubusercontent.com/111609656/217149235-08bef402-7b72-4838-9c29-82c9ab50cdd7.png",
-            wQ: "https://user-images.githubusercontent.com/111609656/217149240-2f8e9f11-2704-40b2-94a8-b14670b36dda.png",
-            wK: "https://user-images.githubusercontent.com/111609656/217149237-14eacace-d8f1-4c6d-bf4c-59169f7cfbf3.png",
+            wP: "/images/white_pawn.png",
+            wR: "/images/white_rook.png",
+            wN: "/images/white_knight.png",
+            wB: "/images/white_bishop.png",
+            wQ: "/images/white_queen.png",
+            wK: "/images/white_king.png",
             OO: "",
-            bP: "https://user-images.githubusercontent.com/111609656/217159745-c92d8368-206d-4c94-ac21-dbf53b231361.png",
-            bR: "https://user-images.githubusercontent.com/111609656/217159750-a6d36405-9bea-4a15-a907-5e6a8f18024a.png",
-            bN: "https://user-images.githubusercontent.com/111609656/217159743-247f6125-fb62-4e7c-abe4-b104156f519f.png",
-            bB: "https://user-images.githubusercontent.com/111609656/217159737-a9c0df5f-0716-4915-b112-91eb254bad85.png",
-            bQ: "https://user-images.githubusercontent.com/111609656/217159747-4eaf5833-f3df-4b86-9bff-1a91a4dbfcf3.png",
-            bK: "https://user-images.githubusercontent.com/111609656/217159740-ef2994a2-3e67-4cb2-9471-00fc883789fd.png",
+            bP: "/images/black_pawn.png",
+            bR: "/images/black_rook.png",
+            bN: "/images/black_knight.png",
+            bB: "/images/black_bishop.png",
+            bQ: "/images/black_queen.png",
+            bK: "/images/black_king.png",
         }
         endGameBool = false;
         //move counter
