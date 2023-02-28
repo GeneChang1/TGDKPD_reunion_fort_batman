@@ -38,7 +38,7 @@ html, body{
     lettersOnBoard = "abcdefgh";
     let gameMoves = [];
     let localColor;
-    var lastMove = []
+    var lastMove = ["move1", "move2"]
     var chessInterval
     const url = "https://tngc.nighthawkcodescrums.gq/api/server"
     // const url = "http://localhost:8069/api/server"
