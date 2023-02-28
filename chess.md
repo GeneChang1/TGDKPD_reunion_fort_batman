@@ -30,9 +30,6 @@ html, body{
 
 <body id="body">
 </body>
-<input type='text' id="uid" placeholder="username">
-<input type='text' id="gid" placeholder="gid">
-<button type="button" onclick="joinGame()">Join or Start Game</button>
 <script src="assets/js/chessLogic.js">
 </script>
 <script>
@@ -41,15 +38,63 @@ html, body{
     lettersOnBoard = "abcdefgh";
     let gameMoves = [];
     let localColor;
-    var lastMove = []
+    var lastMove = ["move1", "move2"]
     var chessInterval
     const url = "https://tngc.nighthawkcodescrums.gq/api/server"
-    // const url = "http://172.19.164.171:8087/api/server"
+    // const url = "http://localhost:8069/api/server"
+    // const url = "http://10.0.0.63:8087/api/server"
     const winnerUrl = 'http://172.19.164.171:8087/api/chess_users'
     //useful functions
-    function globalIDs(){
-        gid = document.getElementById("gid").value
-        localuid = document.getElementById("uid").value
+    openPage()
+    function openPage(){
+        var container = document.createElement('div');
+        var endgame = document.createElement('div');
+        var joinGame = document.createElement('button');
+        var startGame = document.createElement('button');
+        container.classList.add('container');
+        container.id = "container";
+        endgame.classList.add('endgame');
+        endgame.id = "endgame";
+        joinGame.classList.add('button');
+        joinGame.id = "joinGame"
+        joinGame.innerHTML = "Join Game";
+        joinGame.onclick = function(){
+            joinGamePage(); 
+            gameMoves = []}
+        startGame.classList.add('button');
+        startGame.innerHTML = "Start Game";
+        startGame.id = "startGame"
+        startGame.onclick = function(){
+            createNewGame(); 
+            document.getElementById("container").remove();
+            gameMoves = []}
+        document.getElementById('body').appendChild(container)
+        document.getElementById('container').appendChild(endgame)
+        document.getElementById('endgame').appendChild(joinGame)
+        document.getElementById('endgame').appendChild(startGame)
+    }
+    function joinGamePage(){
+        document.getElementById("startGame").remove();
+        document.getElementById("joinGame").remove();
+        var gid = document.createElement('input')
+        var joinGame = document.createElement('button');
+        gid.id = "gid"
+        gid.type = "text"
+        gid.classList.add('button')
+        gid.placeholder = "Game Name"
+        joinGame.classList.add('button');
+            joinGame.id = "joinGame"
+            joinGame.innerHTML = "Join Game";
+            joinGame.onclick = function(){
+                addSecondPlayer(); 
+                document.getElementById("container").remove();
+                gameMoves = []}
+        document.getElementById('endgame').appendChild(gid)
+        document.getElementById('endgame').appendChild(joinGame)
+    }
+    function globalIDs(gidTemp){
+        gid = gidTemp
+        // localuid = document.getElementById("uid").value
     }
     function checkMove(){
         let moveCheckOptions = {
@@ -64,25 +109,38 @@ html, body{
             }
             response.json().then(data => {
             data.forEach((c) => {
-                if (c[[gid]] != undefined){
+                if (c[[gid]] != undefined){j
                     var newMoves = [c[[gid]]["move1"], c[[gid]]["move2"]]
-                    if (lastMove != newMoves){
+                    if (lastMove[0] != newMoves[0] && lastMove[1] != newMoves[1]){
+                        lastMove = newMoves
                         chessBoard[newMoves[0]][1].move(newMoves[1], newMoves[0])
                         putBoard()
                         turn++
-                        if (chessBoard[newMoves[1][0][1] == "k"]){
-                            if (localColor == "b"){
-                                endGame("w")
-                            }
-                            else if (localColor =="w"){
-                                endGame("b")
-                            }
-                        }
+                        kingCheck()
                     }
                 }
             })
         })
         })
+    }
+    function kingCheck(){
+        kingAlive = false
+        for (let i = 1; i < 9; i++){
+                for (j in lettersOnBoard){
+                    var thisId = lettersOnBoard[j] + i;
+                    if (chessBoard[thisId][0] = "K" + localColor){
+                        kingAlive = true
+                    }
+                }
+            }   
+        if (!kingAlive){
+            if (localColor == "b"){
+                endGame("w")
+            }
+            else if (localColor =="w"){
+                endGame("b")
+            }
+        }
     }
     function pushMove(currentM, newM){
         let movePushOptions = {
@@ -152,8 +210,7 @@ html, body{
             })
         })
     }
-    function joinGame(){
-        globalIDs()
+    function readGame(){
         var options = {
             mode : 'cors',
             method: 'GET'
@@ -165,27 +222,12 @@ html, body{
           return;
         }
         response.json().then(data => {
-            gameCreate = true;
-            data.forEach((c) => {
-                try{
-                    if (c[[gid]] != undefined && c[[gid]]["uid2"] == 1234){
-                        addSecondPlayer(gid)
-                        gameCreate = false
-                        return;
-                    }
-                    else {
-                        gameCreate = true
-                    }
-                } catch{}
-            })
-            if (gameCreate){
-                createNewGame(gid)
-            }
-            var gameID = gid;
+            console.log(data)
         })
-        })
+    })
     }
-    function addSecondPlayer(gid){
+    function addSecondPlayer(){
+        gid = document.getElementById("gid").value
         localColor = "b"
         secondPlayerOptions ={
             mode : 'cors',
@@ -198,27 +240,51 @@ html, body{
                 console.log(errorMsg);
             return;
             }
+        response.josn().then(data => {
+            if (data){
+                startGame()
+            }
+            else{
+                invalidGame()
+            }
+        })
         })
         startGame()
         return;
     }
-    function createNewGame(gid){
-        localColor = "w"
-        createGameOptions = {
-            mode : 'cors',
-            method: 'POST',
-            body : JSON.stringify({[gid] : {'uid1' : localuid, 'uid2' : 1234, 'move1' : 'move1', 'move2' : 'move2'}})
+    function invalidGame(){
+        return
+    }
+    function createNewGame(){
+        gidOptions = {
+            mode :'cors',
+            method: 'GET',
         }
-        fetch(url + "/start", createGameOptions)
+        fetch(url + "/createNewGid", gidOptions)
         .then(response => {
-            if (response.status !== 200) {
+            if (response.status !== 200){
                 console.log(errorMsg);
             return;
             }
+        response.json().then(data => {
+            globalIDs(data)
+            localColor = "w"
+            createGameOptions = {
+                mode : 'cors',
+                method: 'POST',
+                body : JSON.stringify({[gid] : {'uid1' : localuid, 'uid2' : 1234, 'move1' : 'move1', 'move2' : 'move2'}})
+            }
+            fetch(url + "/start", createGameOptions)
+            .then(response => {
+                if (response.status !== 200) {
+                    console.log(errorMsg);
+                return;
+                }
+            })
+            startGame()
         })
-        startGame()
+        })
     }
-    // startGame()
     function getKeyByValue(object, value, type) {
         if (type == 1){
             return Object.keys(object).find(key => object[key] === value);
@@ -235,6 +301,7 @@ html, body{
     }
     function movePiece(currentM, newM){
             chessBoard[currentM][1].move(newM, currentM)
+            lastMove = [currentM, newM]
             pushMove(currentM, newM)
     }
     function putOnBoard(id) {
@@ -252,11 +319,14 @@ html, body{
             }
     }
     function startGame(){
-        // apiStartGame()
+        var gidDisplay = document.createElement('p')
+        gidDisplay.id = "gidDisplay"
+        gidDisplay.innerHTML = "Game ID: \"" + gid + "\""
         var chessBoardDiv = document.createElement('div')
         chessBoardDiv.id = "chessBoard"
         chessBoardDiv.classList.add('chessboard')
         document.getElementById("body").appendChild(chessBoardDiv)
+        document.getElementById("body").appendChild(gidDisplay)
         if (localColor == "w"){
             for (let i = 1; i < 9; i++){
                 for (j in lettersOnBoard){
@@ -290,20 +360,35 @@ html, body{
         currentM = [];
         // assigns chess piece codes to their emoji 
         chessPieces = {
-            wP: "https://user-images.githubusercontent.com/111609656/217071573-b89fe06e-7fcf-40d3-a3f5-24b2df70fce3.png",
-            wR: "https://user-images.githubusercontent.com/111609656/217149242-f921fbdc-10fe-4cc8-a3dc-e11874f80342.png",
-            wN: "https://user-images.githubusercontent.com/111609656/217149238-5915e9c8-321c-4854-bc15-4bb6908a7895.png",
-            wB: "https://user-images.githubusercontent.com/111609656/217149235-08bef402-7b72-4838-9c29-82c9ab50cdd7.png",
-            wQ: "https://user-images.githubusercontent.com/111609656/217149240-2f8e9f11-2704-40b2-94a8-b14670b36dda.png",
-            wK: "https://user-images.githubusercontent.com/111609656/217149237-14eacace-d8f1-4c6d-bf4c-59169f7cfbf3.png",
+            wP: "../TGDKPD_reunion_fort_batman/images/white_pawn.png",
+            wR: "../TGDKPD_reunion_fort_batman/images/white_rook.png",
+            wN: "../TGDKPD_reunion_fort_batman/images/white_knight.png",
+            wB: "../TGDKPD_reunion_fort_batman/images/white_bishop.png",
+            wQ: "../TGDKPD_reunion_fort_batman/images/white_queen.png",
+            wK: "../TGDKPD_reunion_fort_batman/images/white_king.png",
             OO: "",
-            bP: "https://user-images.githubusercontent.com/111609656/217159745-c92d8368-206d-4c94-ac21-dbf53b231361.png",
-            bR: "https://user-images.githubusercontent.com/111609656/217159750-a6d36405-9bea-4a15-a907-5e6a8f18024a.png",
-            bN: "https://user-images.githubusercontent.com/111609656/217159743-247f6125-fb62-4e7c-abe4-b104156f519f.png",
-            bB: "https://user-images.githubusercontent.com/111609656/217159737-a9c0df5f-0716-4915-b112-91eb254bad85.png",
-            bQ: "https://user-images.githubusercontent.com/111609656/217159747-4eaf5833-f3df-4b86-9bff-1a91a4dbfcf3.png",
-            bK: "https://user-images.githubusercontent.com/111609656/217159740-ef2994a2-3e67-4cb2-9471-00fc883789fd.png",
+            bP: "../TGDKPD_reunion_fort_batman/images/black_pawn.png",
+            bR: "../TGDKPD_reunion_fort_batman/images/black_rook.png",
+            bN: "../TGDKPD_reunion_fort_batman/images/black_knight.png",
+            bB: "../TGDKPD_reunion_fort_batman/images/black_bishop.png",
+            bQ: "../TGDKPD_reunion_fort_batman/images/black_queen.png",
+            bK: "../TGDKPD_reunion_fort_batman/images/black_king.png",
         }
+        //   chessPieces = {
+        //     wP: "../images/white_pawn.png",
+        //     wR: "../images/white_rook.png",
+        //     wN: "../images/white_knight.png",
+        //     wB: "../images/white_bishop.png",
+        //     wQ: "../images/white_queen.png",
+        //     wK: "../images/white_king.png",
+        //     OO: "",
+        //     bP: "../images/black_pawn.png",
+        //     bR: "../images/black_rook.png",
+        //     bN: "../images/black_knight.png",
+        //     bB: "../images/black_bishop.png",
+        //     bQ: "../images/black_queen.png",
+        //     bK: "../images/black_king.png",
+        // }
         endGameBool = false;
         //move counter
         turn = 0;
@@ -389,14 +474,15 @@ html, body{
             }
         }
         putBoard()
-        chessInterval = setInterval(() => {   try {checkMove()} catch {console.log('heheheha')}}, 1000)
+        chessInterval = setInterval(() => {   try {checkMove()} catch {console.log('heheheha')}}, 5000)
         }
         // startGame()
         function move(div){
             var id = div.id
-            if (!moving && div.children[0].src[8] == "u" && turnMoveCheck()){
+            console.log(div.children[0].src)
+            if (!moving && div.children[0].src.slice(-1) =="g" && turnMoveCheck(chessBoard[id][0][0])){
                 moving = true
-                if (div.children[0].src[8] == "u"){
+                if (div.children[0].src.slice(-1) == "g"){
                     currentM.push(id);
                     var moves = chessBoard[id][1].getAvailableMoves();
                     moves.forEach((c) => {
@@ -420,31 +506,20 @@ html, body{
                 putBoard();
                 currentM = [];
                 moving = false;
-                if (div.children[0].src[8] == "u" && turnMoveCheck()){
+                if (div.children[0].src.slice(-1) == "g" && turnMoveCheck(chessBoard[id][0][0])){
                     move(id);
                 }
             }
         }
-        function turnMoveCheck(){
-            if (turn % 2 == 1 && localColor == "b"){
+        function turnMoveCheck(color){
+            if (turn % 2 == 1 && localColor == "b" && localColor == color){
                 return true
             }
-            if (turn % 2 == 0 && localColor == "w"){
+            if (turn % 2 == 0 && localColor == "w" && localColor == color){
                 return true
             }
             else {
                 return false;
-            }
-        }
-        function turnColorCheck(color){
-            if (color == "w" && turn % 2 == 0){
-                return true;
-            }
-            if (color == "b" && turn % 2 == 1){
-                return true
-            }
-            else{
-                return false
             }
         }
         function endGame(color){
@@ -457,38 +532,54 @@ html, body{
             document.getElementById("chessBoard").remove();
             var container = document.createElement('div');
             var endgame = document.createElement('div');
-            var newGame = document.createElement('button');
+            var winlose = document.createElement('p');
+            var joinGame = document.createElement('button');
+            var startGame = document.createElement('button');
             container.classList.add('container');
             container.id = "container";
+            winlose.classList.add('winLose');
+            if (color = localColor){
+                winlose.innerHTML = "You Win!"
+            }
+            else {
+                winlose.innerHTML = "You Lose!"
+            }
             endgame.classList.add('endgame');
             endgame.id = "endgame";
-            newGame.classList.add('button');
-            newGame.innerHTML = "New Game";
-            newGame.onclick = function(){
-                startGame(); 
+            joinGame.classList.add('button');
+            joinGame.id = "joinGame"
+            joinGame.innerHTML = "Join Game";
+            joinGame.onclick = function(){
+                joinGamePage(); 
+                gameMoves = []}
+            startGame.classList.add('button');
+            startGame.innerHTML = "Start Game";
+            startGame.id = "startGame"
+            startGame.onclick = function(){
+                createNewGame(); 
                 document.getElementById("container").remove();
                 gameMoves = []}
             document.getElementById('body').appendChild(container)
             document.getElementById('container').appendChild(endgame)
-            document.getElementById('endgame').appendChild(newGame)
+            document.getElementById('endgame').appendChild(joinGame)
+            document.getElementById('endgame').appendChild(startGame)
             clearInterval(chessInterval)
             pushWinner(color)
-        }
-        // const url = "https://tngc.nighthawkcodescrums.gq/api/server1/put"
-        // let options = {
-        //     mode = 'CORS'
-        //     body = JSON.stringify(moves);
-        //     method = 'POST'
-        //     }
-        // fetch(url + "/update_game", options)
-        // .then(response => {
-        // if (response.status !== 200) {
-        //   console.log(errorMsg);
-        //   return;
-        // }
-        // response.json().then(data => {
-        //     console.log(data);
-        // })
+            // setInterval(function (){
+            //     deleteOptions = {
+            //         mode : 'cors',
+            //         method: 'DELETE',
+            //         body : gid
+            //     }
+            //     fetch(url + "/removeGame", deleteOptions)
+            //     .then(response => {
+            //         if (response.status !== 200){
+            //             console.log(errorMsg);
+            //         return;
+            //         }
+            //     })
+            // }, 10000)
+            }   
 </script>
 <script>
 </script>

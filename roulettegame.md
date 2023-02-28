@@ -73,6 +73,25 @@
 		<script src="assets/js/roulette.js"></script></div>
 	</body>
 	<script>
+		// const gamearea1 = document.querySelector(".gamearea");
+		// const score1 = createEle(gamearea1, "div", "Score :", "score");
+		// const bt1 = createEle(gamearea1, "button", "Spin", "btn");
+		// const message1 = createEle(gamearea1, "div", "Press Spin", "message");
+		// const output1 = createEle(gamearea1, "div", "", "output");
+		// const game1 = {
+		// 	x: 7,
+		// 	y: 9,
+		// 	coins: 50,
+		// 	sel: [],
+		// 	eles: [],
+		// 	winner: false,
+		// 	styler: ["black", "white"],
+		// };
+		// const total1 = game.x * game.y;
+		// btn.disabled = true;
+		// btn.addEventListener("click", spinner);
+		// createBoard();
+		// score.innerHTML = `Coins : ${game.coins}`;
 		const gamearea1 = document.querySelector(".gamearea");
 		const score1 = createEle(gamearea1, "div", "Score :", "score");
 		const btn1 = createEle(gamearea1, "button", "Spin", "btn");
@@ -87,11 +106,11 @@
 			winner: false,
 			styler: ["black", "white"],
 		};
-		const total1 = game.x * game.y;
+		const boardTotal = game1.x * game1.y;
 		btn.disabled = true;
 		btn.addEventListener("click", spinner);
 		createBoard();
-		score.innerHTML = `Coins : ${game.coins}`;
+		score.innerHTML = `Coins : ${game1.coins}`;
 		const isLocalhost = Boolean(
 			window.location.hostname === "localhost" ||
 				window.location.hostname === "[::1]" ||
@@ -99,7 +118,7 @@
 					/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
 				)
 		);
-		const api = isLocalhost ? "http://localhost:8069/api" : "https://tngc.nighthawkcodescrums.gq/api/";
+		const api = isLocalhost ? "http://localhost:8069/api" : "https://tngc.nighthawkcodescrums.gq/api";
         // This function is called when the user wants to load their game score.
         // It retrieves the value of the 'user' input field from the webpage and sends it as a query parameter to an API endpoint using a Fetch request.
         // The API endpoint is expected to respond with a JSON object that includes the user's game score.
@@ -109,7 +128,7 @@
 		const loadScore = async () => {
 			const user = document.getElementById("user").value;
 			const record = await fetch(
-				api + "/roulette?" + new URLSearchParams({ user })
+				api + "/roulette" + new URLSearchParams({ user })
 			).then((r) => r.json());
 			console.log(record);
 			game.coins = record.score;
