@@ -326,7 +326,7 @@ html, body{
         chessBoardDiv.id = "chessBoard"
         chessBoardDiv.classList.add('chessboard')
         document.getElementById("body").appendChild(chessBoardDiv)
-        // document.getElementById("body").appendChild(gidDisplay)
+        document.getElementById("body").appendChild(gidDisplay)
         if (localColor == "w"){
             for (let i = 1; i < 9; i++){
                 for (j in lettersOnBoard){
