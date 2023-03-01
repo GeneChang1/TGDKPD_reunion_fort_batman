@@ -84,7 +84,7 @@ document.getElementById("signUp").onclick = function(){
     //     body: JSON.stringify(data)
     // })
     // .then(response => response.json().then(data => {
-        
+
     // })
     // )
     // .then(response => console.log(response))
