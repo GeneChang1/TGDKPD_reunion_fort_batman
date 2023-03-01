@@ -5,27 +5,44 @@ description: A sign-in screen that interacts with Python and obtains a user.
 permalink: /signin
 ---
 
+<p><h2 style="text-align: center">Log In</h2></p>
 <form id="form">
     <p><label>
-        User ID:
-        <input type="text" name="name" id="name" required="" />
+        Username:
+        <input type="text" name="name" id="loginName" required="" />
     </label></p>
     <p><label>
         Password:
-        <input type="password" name="password" id="password" required="" />
+        <input type="password" name="password" id="loginPassword" required="" />
     </label></p>
-    <button type="submit">Login</button>
+    <p><button class="btn btn-dark button" type="submit">Login</button></p>
     <p id="message"></p>
 </form>
-
+<p><h2 style="text-align: center">
+    Sign Up
+</h2></p>
+<p><label>
+    Username:
+    <input type="text" name="name" id="name" required="" />
+</label></p>
+<p><label>
+    Password:
+    <input type="password" name="password" id="password" required="" />
+</label></p>
+<p><label>
+    Confirm Password:
+    <input type="password" name="password" id="passwordConfirm" required="" />
+</label></p>
+<p><button class="btn btn-dark button" type="submit" id="signUp">Sign Up</button></p>
+<script src="assets/js/login.js"></script>
 <script>
     document.getElementById("form").addEventListener("submit", (event) => {
         event.preventDefault();
         const url = "https://tngc.nighthawkcodescrums.gq/api/names/";
         // const url = "http://172.20.159.234:8087/api/names/"
         const body = {
-            name: document.getElementById("name").value,
-            password: document.getElementById("password").value,
+            name: document.getElementById("loginName").value,
+            password: document.getElementById("loginPassword").value,
         };
         const requestOptions = {
             method: 'POST',
