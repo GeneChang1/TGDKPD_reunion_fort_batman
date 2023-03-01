@@ -73,25 +73,6 @@
 		<script src="assets/js/roulette.js"></script></div>
 	</body>
 	<script>
-		// const gamearea1 = document.querySelector(".gamearea");
-		// const score1 = createEle(gamearea1, "div", "Score :", "score");
-		// const bt1 = createEle(gamearea1, "button", "Spin", "btn");
-		// const message1 = createEle(gamearea1, "div", "Press Spin", "message");
-		// const output1 = createEle(gamearea1, "div", "", "output");
-		// const game1 = {
-		// 	x: 7,
-		// 	y: 9,
-		// 	coins: 50,
-		// 	sel: [],
-		// 	eles: [],
-		// 	winner: false,
-		// 	styler: ["black", "white"],
-		// };
-		// const total1 = game.x * game.y;
-		// btn.disabled = true;
-		// btn.addEventListener("click", spinner);
-		// createBoard();
-		// score.innerHTML = `Coins : ${game.coins}`;
 		const gamearea1 = document.querySelector(".gamearea");
 		const score1 = createEle(gamearea1, "div", "Score :", "score");
 		const btn1 = createEle(gamearea1, "button", "Spin", "btn");
@@ -118,7 +99,7 @@
 					/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
 				)
 		);
-		const api = isLocalhost ? "http://localhost:8069/api" : "https://tngc.nighthawkcodescrums.gq/api";
+		const api = isLocalhost ? "http://172.20.20.82:8087/" : "https://tngc.nighthawkcodescrums.gq/api";
         // This function is called when the user wants to load their game score.
         // It retrieves the value of the 'user' input field from the webpage and sends it as a query parameter to an API endpoint using a Fetch request.
         // The API endpoint is expected to respond with a JSON object that includes the user's game score.
@@ -230,8 +211,8 @@
         // It also logs the game selection to the console.
 		function updateScore() {
 			const user = document.getElementById("user").value;
-			fetch(api + "/roulette", {
-				method: "PUT",
+			fetch(api + "/put", {
+				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -245,7 +226,7 @@
 		function createAccount() {
 			game.coins = 50;
 			const user = document.getElementById("user").value;
-			fetch(api + "/roulette", {
+			fetch(api + "/post", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
