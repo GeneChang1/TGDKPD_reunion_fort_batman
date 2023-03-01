@@ -21,16 +21,17 @@ permalink: /signin
 <script>
     document.getElementById("form").addEventListener("submit", (event) => {
         event.preventDefault();
-        const url = "https://tngc.nighthawkcodescrums.gq/api/chess_users/";
+        // const url = "https://tngc.nighthawkcodescrums.gq/api/names/";
+        const url = "http://172.20.159.234:8087/api/names/"
         const body = {
             name: document.getElementById("name").value,
             password: document.getElementById("password").value,
         };
         const requestOptions = {
             method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
+            // mode: 'cors',
+            // cache: 'no-cache',
+            // credentials: 'same-origin',
             body: JSON.stringify(body),
             headers: {
                 "Content-Type": "application/json",
@@ -38,22 +39,38 @@ permalink: /signin
         };
         fetch(url, requestOptions)
             .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else if (response.status === 400) {
-                    throw new Error('Invalid user id or password');
-                } else {
-                    throw new Error('Login error: ' + response.status + " " + response.statusText);
+                console.log(response)
+                if (response.status === 200){
+                    return response.json()
+                }
+                else if (response.status === 210) {
+                    document.getElementById("message").innerHTML = "Username must be more than 2 characters";
+                    return
+                }
+                else if (response.status === 211) {
+                    document.getElementById("message").innerHTML = "Username not found";
+                    return
+                }
+                else if (response.status === 212) {
+                    document.getElementById("message").innerHTML = "Password incorrect";
+                    return
+                }
+                else {
+                    document.getElementById("message").innerHTML = "Error " + response.status;
+                    return
                 }
             })
             .then(data => {
+                if (data == undefined){
+                    return
+                }
                 const message = 'Login success: ' + data.name;
                 document.getElementById("message").innerHTML = message;
                 localStorage.setItem("name", data.name);
-                localStorage.setItem("visitor", data.name);
             })
-            .catch(error => {
-                const message = error.message;
+            .catch(response => {
+                const message = response.message;
+                
                 document.getElementById("message").innerHTML = message;
                 localStorage.removeItem("name");
                 localStorage.removeItem("visitor");
