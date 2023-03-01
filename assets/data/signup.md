@@ -34,6 +34,7 @@ permalink: /signin
     <input type="password" name="password" id="passwordConfirm" required="" />
 </label></p>
 <p><button class="btn btn-dark button" type="submit" id="signUp">Sign Up</button></p>
+<p id="message2"></p>
 <script src="assets/js/login.js"></script>
 <script>
     document.getElementById("form").addEventListener("submit", (event) => {

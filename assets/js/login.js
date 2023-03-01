@@ -68,6 +68,7 @@ document.getElementById("signUp").onclick = function(){
         })
         .then(response => response.json().then(data => {
             console.log(data)
+            document.getElementById("message2").innerHTML = "Signed up!"
         })
         )
         .then(response => console.log(response))
