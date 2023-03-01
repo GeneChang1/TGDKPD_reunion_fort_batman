@@ -22,6 +22,7 @@ permalink: /signin
     document.getElementById("form").addEventListener("submit", (event) => {
         event.preventDefault();
         const url = "https://tngc.nighthawkcodescrums.gq/api/names/";
+        // const url = "http://172.20.159.234:8087/api/names/"
         const body = {
             name: document.getElementById("name").value,
             password: document.getElementById("password").value,
@@ -60,19 +61,29 @@ permalink: /signin
                 }
             })
             .then(data => {
-                if (data == undefined){
+                if (data.message == "name is missing") {
+                    document.getElementById("message").innerHTML = "Username must be more than 2 characters";
+                    return
+                }
+                else if (data.message == "invalid username") {
+                    document.getElementById("message").innerHTML = "Username not found";
+                    return
+                }
+                else if (data.message == "wrong password") {
+                    document.getElementById("message").innerHTML = "Password incorrect";
                     return
                 }
                 const message = 'Login success: ' + data.name;
                 document.getElementById("message").innerHTML = message;
+                if (data.message != undefined)
+                return document.getElementById("message").innerHTML ="Error: " +  data.message;
                 localStorage.setItem("name", data.name);
             })
             .catch(response => {
                 const message = response.message;
                 
-                document.getElementById("message").innerHTML = message;
+                document.getElementById("message").innerHTML = "Error: " + message;
                 localStorage.removeItem("name");
-                localStorage.removeItem("visitor");
             });
     });
 </script>
