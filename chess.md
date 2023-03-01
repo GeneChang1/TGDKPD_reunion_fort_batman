@@ -40,9 +40,9 @@ html, body{
     let localColor;
     var lastMove = ["move1", "move2"]
     var chessInterval
-    // const url = "https://tngc.nighthawkcodescrums.gq/api/server"
+    const url = "https://tngc.nighthawkcodescrums.gq/api/server"
     // const url = "http://localhost:8069/api/server"
-    const url = "http://10.0.0.63:8087/api/server"
+    // const url = "http://10.0.0.63:8087/api/server"
     const winnerUrl = 'https://tngc.nighthawkcodescrums.gq/api/chess_users'
     //useful functions
     openPage()
@@ -81,6 +81,8 @@ html, body{
         uid.id = "uid"
         uid.type = "text"
         uid.placeholder = "Username"
+        uid.readOnly = true
+        uid.value = localStorage.getItem("name")
         title.id = "chessTitle"
         title.classList.add('title')
         title.innerHTML = "Welcome to Chess"
