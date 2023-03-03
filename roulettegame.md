@@ -49,17 +49,18 @@
 				margin-top: 10px;
 				margin-bottom: 0px;
 			}
-            .gamearea1 {
+            .gamearea {
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
             }
-            .gamearea1 >button {
+            .gamearea >button {
                 width: 100px;
             }
 		</style>
 	</head>
 	<body>
+	<!--reg html for UI-->
         <div class="container">
 		<h1>Load your progress!</h1>
 		<input placeholder="Username" id="user" type="text" />
@@ -70,15 +71,15 @@
 		<button onclick="createAccount()">Create</button>
 		<hr />
 		<div class="gamearea"></div>
-		<script src="assets/js/roulette.js"></script></div>
+		<script src="game1.js"></script></div>
 	</body>
 	<script>
-		const gamearea1 = document.querySelector(".gamearea");
-		const score1 = createEle(gamearea1, "div", "Score :", "score");
-		const btn1 = createEle(gamearea1, "button", "Spin", "btn");
-		const message1 = createEle(gamearea1, "div", "Press Spin", "message");
-		const output1 = createEle(gamearea1, "div", "", "output");
-		const game1 = {
+		const gamearea = document.querySelector(".gamearea");
+		const score = createEle(gamearea, "div", "Score :", "score");
+		const btn = createEle(gamearea, "button", "Spin", "btn");
+		const message = createEle(gamearea, "div", "Press Spin", "message");
+		const output = createEle(gamearea, "div", "", "output");
+		const game = {
 			x: 7,
 			y: 9,
 			coins: 50,
@@ -87,11 +88,11 @@
 			winner: false,
 			styler: ["black", "white"],
 		};
-		const boardTotal = game1.x * game1.y;
+		const total = game.x * game.y;
 		btn.disabled = true;
 		btn.addEventListener("click", spinner);
 		createBoard();
-		score.innerHTML = `Coins : ${game1.coins}`;
+		score.innerHTML = `Coins : ${game.coins}`;
 		const isLocalhost = Boolean(
 			window.location.hostname === "localhost" ||
 				window.location.hostname === "[::1]" ||
@@ -99,7 +100,7 @@
 					/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
 				)
 		);
-		const api = isLocalhost ? "http://172.20.20.82:8087/" : "https://tngc.nighthawkcodescrums.gq/api";
+		const api = isLocalhost ? "http://localhost:5000" : "https://tngc.nighthawkcodescrums.gq/api/roulette";
         // This function is called when the user wants to load their game score.
         // It retrieves the value of the 'user' input field from the webpage and sends it as a query parameter to an API endpoint using a Fetch request.
         // The API endpoint is expected to respond with a JSON object that includes the user's game score.
@@ -109,7 +110,7 @@
 		const loadScore = async () => {
 			const user = document.getElementById("user").value;
 			const record = await fetch(
-				api + "/roulette" + new URLSearchParams({ user })
+				api + "/roulette?" + new URLSearchParams({ user })
 			).then((r) => r.json());
 			console.log(record);
 			game.coins = record.score;
@@ -148,6 +149,7 @@
 				el.bet = false;
 			});
 		}
+		<!--  -->
 		function createBoard() {
 			for (let i = 0; i < total; i++) {
 				const temp = createEle(output, "div", `${i + 1}`, "box");
@@ -162,8 +164,9 @@
 				temp.addEventListener(
 					"click",
 					(e) => {
+						// wont let person play w/o making user
 						if (document.getElementById("user").value === "") {
-							alert("Please enter a user to start!");
+							alert("Please enter a user to start!"); 
 							return;
 						}
 						btn.disabled = false;
@@ -211,8 +214,8 @@
         // It also logs the game selection to the console.
 		function updateScore() {
 			const user = document.getElementById("user").value;
-			fetch(api + "/put", {
-				method: "POST",
+			fetch(api + "/roulette", {
+				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -226,7 +229,7 @@
 		function createAccount() {
 			game.coins = 50;
 			const user = document.getElementById("user").value;
-			fetch(api + "/post", {
+			fetch(api + "/roulette", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
