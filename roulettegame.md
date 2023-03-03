@@ -100,7 +100,7 @@
 					/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
 				)
 		);
-		const api = isLocalhost ? "http://localhost:5000" : "https://tngc.nighthawkcodescrums.gq/api/roulette";
+		const api = isLocalhost ? "http://localhost:5000/" : "http://127.0.0.1:5000/api/roulette";
         // This function is called when the user wants to load their game score.
         // It retrieves the value of the 'user' input field from the webpage and sends it as a query parameter to an API endpoint using a Fetch request.
         // The API endpoint is expected to respond with a JSON object that includes the user's game score.
