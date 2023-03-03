@@ -5,7 +5,6 @@ layout: default
 <!-- <link rel="stylesheet" href="assets/css/chess.css" type="text/css"> -->
 <style>
     .container{
-    margin-top: 5%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,7 +40,11 @@ layout: default
     margin-top: 5%;
     font-size: 65;
 }
+.title{
+    font-size:80
+}
 </style>
+<p style="title">Welcome to Chess</p>
 <div class="container">
     <div class="endgame">
     <p class="winLose"> You Win</p>

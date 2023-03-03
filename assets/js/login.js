@@ -1,8 +1,8 @@
 //placeholder for api link
 // const url = 'http://172.17.66.185:8087/api/chess_users/'
 // const url = 'http://localhost:8069/api/chess_users/'
-const url = 'http://172.19.164.171:8087/api/chess_users/'
-// const url = 'https://tngc.nighthawkcodescrums.gq/api/chess_users/'
+// const url = 'http://172.19.164.171:8087/api/chess_users/'
+const url = 'https://tngc.nighthawkcodescrums.gq/api/chess_users/'
 const options = {
     method: 'POST',
     cache: 'default',
@@ -46,8 +46,13 @@ document.getElementById("signUp").onclick = function(){
         return
     }
 
+    if (password.length < 3 || name.length < 3){
+        alert("Username and password must be greater than 3 characters")
+        return
+    }
+
     var passwordConfirm = document.getElementById("passwordConfirm").value.toString()
-    var dob = document.getElementById("dob").value
+    var dob = ""
     var values = [name, password, dob]
 
     // only run if passwords match
@@ -63,11 +68,11 @@ document.getElementById("signUp").onclick = function(){
         })
         .then(response => response.json().then(data => {
             console.log(data)
+            document.getElementById("message2").innerHTML = "Signed up!"
         })
         )
         .then(response => console.log(response))
         .catch(err => console.error(err))
-        alert("stored data: " +data)
     } else {
         alert("Passwords don't match!")
     }

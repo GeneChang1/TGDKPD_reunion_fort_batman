@@ -42,7 +42,7 @@ html, body{
     var chessInterval
     const url = "https://tngc.nighthawkcodescrums.gq/api/server"
     // const url = "http://localhost:8069/api/server"
-    // const url = "http://10.8.141.104:8087/api/server"
+    // const url = "http://10.0.0.63:8087/api/server"
     const winnerUrl = 'https://tngc.nighthawkcodescrums.gq/api/chess_users'
     //useful functions
     openPage()
@@ -58,6 +58,7 @@ html, body{
         var uid = document.createElement('input');
         var joinGame = document.createElement('button');
         var startGame = document.createElement('button');
+        var title = document.createElement('p');
         container.classList.add('container');
         container.id = "container";
         endgame.classList.add('endgame');
@@ -72,6 +73,7 @@ html, body{
         startGame.innerHTML = "Start Game";
         startGame.id = "startGame"
         startGame.onclick = function(){
+            document.getElementById('chessTitle').remove();
             if(uidCheck()){createNewGame()}
             document.getElementById("container").remove();
             gameMoves = []}
@@ -79,6 +81,12 @@ html, body{
         uid.id = "uid"
         uid.type = "text"
         uid.placeholder = "Username"
+        uid.readOnly = true
+        uid.value = localStorage.getItem("name")
+        title.id = "chessTitle"
+        title.classList.add('title')
+        title.innerHTML = "Welcome to Chess"
+        document.getElementById('body').appendChild(title)
         document.getElementById('body').appendChild(container)
         document.getElementById('container').appendChild(endgame)
         document.getElementById('endgame').appendChild(uid)
@@ -98,9 +106,7 @@ html, body{
             joinGame.id = "joinGame"
             joinGame.innerHTML = "Join Game";
             joinGame.onclick = function(){
-                addSecondPlayer(); 
-                document.getElementById("container").remove();
-                gameMoves = []}
+                addSecondPlayer();}
         document.getElementById('endgame').appendChild(gid)
         document.getElementById('endgame').appendChild(joinGame)
     }
@@ -110,6 +116,7 @@ html, body{
             bad.innerHTML = "Please reload and enter a username"
             document.getElementById("container").remove()
             document.getElementById('body').appendChild(bad)
+            document.getElementById('chessTitle').remove()
             return false;
         }
         else {
@@ -158,12 +165,12 @@ html, body{
                 }
             }   
         if (!kingAlive){
-                deleteOptions = {
+                removeOptions = {
                     mode : 'cors',
-                    method: 'DELETE',
+                    method: 'POST',
                     body : gid
                 }
-                fetch(url + "/removeGame", deleteOptions)
+                fetch(url + "/removeGame", removeOptions)
                 .then(response => {
                     if (response.status !== 200){
                         console.log(errorMsg);
@@ -275,8 +282,19 @@ html, body{
             if (response.status !== 200) {
                 console.log(errorMsg);
             return;
+        }
+        response.json().then(success => {
+            if (success){
+                document.getElementById('chessTitle').remove()
+                document.getElementById("container").remove();
+                gameMoves = []
+                startGame()
+            }else{
+                document.getElementById('chessTitle').innerHTML = "Please use a valid game name.";
+                document.getElementById('chessTitle').style.fontSize = 50
+                document.getElementById('chessTitle').style.marginTop = "1.5%"
             }
-        startGame()
+        })
         })
         return;
     }
